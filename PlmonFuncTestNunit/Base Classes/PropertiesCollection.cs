@@ -33,7 +33,7 @@ namespace PlmonFuncTestNunit
         protected ExtentReports _extent;
         protected ExtentTest _test;
         public static IWebDriver driver;
-        public static Base_Classes.ReportsManager reports;
+        //public static Base_Classes.ReportsManager reports;
 
         [OneTimeSetUp]
         protected void StartReport()
@@ -79,7 +79,7 @@ namespace PlmonFuncTestNunit
                 //    break;
             }
             //driver.Manage().Window.Maximize();
-            reports = new Base_Classes.ReportsManager(browserName, TestsInputData.AutomationSettings.BaseUrl);
+            //reports = new Base_Classes.ReportsManager(browserName, TestsInputData.AutomationSettings.BaseUrl);
             Goto(TestsInputData.AutomationSettings.BaseUrl);
 
 
@@ -93,7 +93,7 @@ namespace PlmonFuncTestNunit
         public static void Goto(string url)
         {
             driver.Url = url;
-            reports.verifyURL(url);
+            //reports.verifyURL(url);
         }
         public static string Title
         {
