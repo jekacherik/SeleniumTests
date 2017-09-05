@@ -19,23 +19,22 @@ namespace PlmonFuncTestNunit
 
         //public static Base_Classes.ReportsManager reports;
         [Test]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserToRunWith")]
+        [TestCaseSource(typeof(PropertiesCollection), "BrowserUser")]
 
-        public void VerifyValidLogin(String browserName)
+        public void VerifyValidLogin(String browserName, String user)
         {
 
             SetUp(browserName);
             System.Threading.Thread.Sleep(3000);
             LoginPageObjects pagelogin = new LoginPageObjects();
             //Get data for test in xml
-            String[] users = TestsInputData.AutomationSettings.Users.Split(',');
-            pagelogin.Login(users[0], TestsInputData.AutomationSettings.Password);
+            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
             string DeskURL = driver.Url;
             string message = "login faild";
             Char delimiter = '?';
             String[] substrings = DeskURL.Split(delimiter);
             var parseDesk = substrings[0];
-            Assert.AreEqual(parseDesk, TestsInputData.AutomationSettings.Desk, message);
+            Assert.AreEqual(TestsInputData.AutomationSettings.Desk, parseDesk,  message);
 
             _test.Log(Status.Info, "User Login in the system");
             _extent.Flush();

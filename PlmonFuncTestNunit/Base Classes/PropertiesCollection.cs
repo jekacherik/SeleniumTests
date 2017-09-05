@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PlmonFuncTestNunit.Base_Classes;
+using System.Drawing;
 
 namespace PlmonFuncTestNunit
 {
@@ -63,18 +64,21 @@ namespace PlmonFuncTestNunit
             {
                 case "Chrome":
                     driver = new ChromeDriver();
+                    driver.Manage().Window.Size = new Size(1024, 768);
                     break;
                 case "ie":
                     driver = new InternetExplorerDriver();
+                    driver.Manage().Window.Maximize();
                     break;
                 case "Edge":
                     driver = new EdgeDriver();
+                    driver.Manage().Window.Size = new Size(1920, 1080);
                     break;
                 //case "Firefox":
                 //    driver = new FirefoxDriver();
                 //    break;
             }
-            driver.Manage().Window.Maximize();
+            //driver.Manage().Window.Maximize();
             reports = new Base_Classes.ReportsManager(browserName, TestsInputData.AutomationSettings.BaseUrl);
             Goto(TestsInputData.AutomationSettings.BaseUrl);
 
@@ -150,6 +154,19 @@ namespace PlmonFuncTestNunit
             }
 
         }
+
+        static object[] BrowserUser =
+        {
+            new object[] { "ie","ET"},
+            new object[] { "Chrome","UserET"},
+            new object[] { "Edge", "userSel" },
+        };
+        static object[] BrowserUser1 =
+        {
+            new object[] { "Chrome","UserET"}
+ 
+        };
+
 
 
     }

@@ -13,11 +13,12 @@ namespace PlmonFuncTestNunit.Tests
 {
     [TestFixture]
 
+    //[Parallelizable]
     public class ControlPanel : PropertiesCollection
     {
         [Test , Category("Function test Open CP")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserToRunWith")]
-        public void CheckOpenCP(String browserName)
+        [TestCaseSource(typeof(PropertiesCollection), "BrowserUser")]
+        public void CheckOpenCP(String browserName,String user)
         {
             SetUp(browserName);
             System.Threading.Thread.Sleep(3000);
@@ -25,8 +26,8 @@ namespace PlmonFuncTestNunit.Tests
             //Login in the System
             LoginPageObjects pagelogin = new LoginPageObjects();
             //Get data for test in xml
-            String[] users = TestsInputData.AutomationSettings.Users.Split(',');
-            pagelogin.Login(users[1], TestsInputData.AutomationSettings.Password);
+            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
+            System.Threading.Thread.Sleep(1000);
             string DeskURL = driver.Url;
             string message = "login faild";
             Char delimiter = '?';
@@ -49,22 +50,21 @@ namespace PlmonFuncTestNunit.Tests
 
         }
         [Test, Category("Function test CP")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserToRunWith")]
-        public void CheckAddNewFolder(String browserName)
+        [TestCaseSource(typeof(PropertiesCollection), "BrowserUser1")]
+        public void CheckAddNewFolder(String browserName, String user)
         {
             SetUp(browserName);
             System.Threading.Thread.Sleep(1000);
 
             LoginPageObjects pagelogin = new LoginPageObjects();
             //Get data for test in xml
-            String[] users = TestsInputData.AutomationSettings.Users.Split(',');
-            pagelogin.Login(users[1], TestsInputData.AutomationSettings.Password);
+            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
             string DeskURL = driver.Url;
             string message = "login faild";
             Char delimiter = '?';
             String[] substrings = DeskURL.Split(delimiter);
             var parseDesk = substrings[0];
-            Assert.AreEqual(parseDesk, TestsInputData.AutomationSettings.Desk, message);
+            Assert.AreEqual(TestsInputData.AutomationSettings.Desk, parseDesk, message);
 
             _test.Log(Status.Info, "User Login in the system");
             _extent.Flush();
