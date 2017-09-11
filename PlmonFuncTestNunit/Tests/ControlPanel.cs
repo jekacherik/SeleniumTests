@@ -13,11 +13,12 @@ namespace PlmonFuncTestNunit.Tests
 {
     [TestFixture]
 
-    //[Parallelizable]
+    //[Parallelizable(ParallelScope.Fixtures)]
     public class ControlPanel : PropertiesCollection
     {
+
         [Test , Category("Function test Open CP")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserUser")]
+        [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckOpenCP(String browserName,String user)
         {
             SetUp(browserName);
@@ -27,30 +28,22 @@ namespace PlmonFuncTestNunit.Tests
             LoginPageObjects pagelogin = new LoginPageObjects();
             //Get data for test in xml
             pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
-            System.Threading.Thread.Sleep(1000);
-            string DeskURL = driver.Url;
-            string message = "login faild";
-            Char delimiter = '?';
-            String[] substrings = DeskURL.Split(delimiter);
-            var parseDesk = substrings[0];
-            Assert.AreEqual(parseDesk, TestsInputData.AutomationSettings.Desk, message);
-
             _test.Log(Status.Info, "User Login in the system");
             _extent.Flush();
 
             //Open CP in menu
-
             PageObjectCP deskPage = new PageObjectCP();
 
             deskPage.OpenCP();
-            Assert.AreEqual(deskPage.labelTitle(), "Control Panel", "Element found");
+            System.Threading.Thread.Sleep(3000);
+            Assert.AreEqual("Control Panel", deskPage.labelTitle(), "Element found");
             _test.Log(Status.Info, "Open Control Panel link");
             _extent.Flush();
 
 
         }
         [Test, Category("Function test CP")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserUser1")]
+        [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckAddNewFolder(String browserName, String user)
         {
             SetUp(browserName);
@@ -59,12 +52,6 @@ namespace PlmonFuncTestNunit.Tests
             LoginPageObjects pagelogin = new LoginPageObjects();
             //Get data for test in xml
             pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
-            string DeskURL = driver.Url;
-            string message = "login faild";
-            Char delimiter = '?';
-            String[] substrings = DeskURL.Split(delimiter);
-            var parseDesk = substrings[0];
-            Assert.AreEqual(TestsInputData.AutomationSettings.Desk, parseDesk, message);
 
             _test.Log(Status.Info, "User Login in the system");
             _extent.Flush();
@@ -72,7 +59,8 @@ namespace PlmonFuncTestNunit.Tests
             PageObjectCP deskPage = new PageObjectCP();
 
             deskPage.OpenCP();
-            Assert.AreEqual(deskPage.labelTitle(), "Control Panel", "Element found");
+            System.Threading.Thread.Sleep(3000);
+            Assert.AreEqual( "Control Panel", deskPage.labelTitle(), "Element found");
             _test.Log(Status.Info, "Open Control Panel link");
             _extent.Flush();
 

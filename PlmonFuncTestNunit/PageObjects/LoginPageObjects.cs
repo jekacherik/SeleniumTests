@@ -3,6 +3,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ namespace PlmonFuncTestNunit
 {
     public class LoginPageObjects : PropertiesCollection
     {
+
         public LoginPageObjects()
         {
             PageFactory.InitElements(driver, this);
@@ -40,10 +43,17 @@ namespace PlmonFuncTestNunit
             txtUserPass.EnterText(password);
             ////Click button
             btnLogin.Click();
- 
+            System.Threading.Thread.Sleep(4000);
 
-            //Return EAPageObjects
-            //return new EAPageObjects();
+            //Check correct Login
+            string DeskURL = getDriver.Url;
+            string message = "login faild";
+            Char delimiter = '?';
+            String[] substrings = DeskURL.Split(delimiter);
+            var parseDesk = substrings[0];
+            Assert.AreEqual(parseDesk, TestsInputData.AutomationSettings.Desk, message);
+
+
         }
     }
 }

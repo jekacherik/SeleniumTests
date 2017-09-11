@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PlmonFuncTestNunit.Base_Classes;
 using System.Drawing;
+using OpenQA.Selenium.Support.Events;
 
 namespace PlmonFuncTestNunit
 {
@@ -33,6 +34,7 @@ namespace PlmonFuncTestNunit
         protected ExtentReports _extent;
         protected ExtentTest _test;
         public static IWebDriver driver;
+         
         //public static Base_Classes.ReportsManager reports;
 
         [OneTimeSetUp]
@@ -53,18 +55,51 @@ namespace PlmonFuncTestNunit
 
 
         }
+        static void firingDriver_ExceptionThrown(object sender, WebDriverExceptionEventArgs e)
+        {
+            Console.WriteLine(e.ThrownException.Message);
+        }
 
-        //[OneTimeSetUp]
+        static void firingDriver_ElementClicked(object sender, WebElementEventArgs e)
+        {
+            Console.WriteLine(e.Element);
+            string URL = driver.Url;
+            Char delimiter = '?';
+            String[] substrings = URL.Split(delimiter);
+            var parseUrl = substrings[0];
+            if (parseUrl == "http://uiprototype80.dyn.yuniquecloud.com/plmOn/CustomError.aspx")
+            {
+                Assert.Fail("Found OOps!!!");
+            }
+        }
+
+        static void firingDriver_FindElementCompleted(object sender, FindElementEventArgs e)
+        {
+            Console.WriteLine(e.FindMethod);
+        }
+        ////[OneTimeSetUp]
 
         public void SetUp(String browserName)
         {
 
             _test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
+            var firingDriver = new EventFiringWebDriver(driver);
+            firingDriver.ExceptionThrown +=
+                new EventHandler<WebDriverExceptionEventArgs>(firingDriver_ExceptionThrown);
+
+            firingDriver.ElementClicked +=
+                new EventHandler<WebElementEventArgs>(firingDriver_ElementClicked);
+
+            firingDriver.FindElementCompleted +=
+                new EventHandler<FindElementEventArgs>(firingDriver_FindElementCompleted);
+
+            driver = firingDriver;
             switch (browserName)
             {
                 case "Chrome":
                     driver = new ChromeDriver();
-                    driver.Manage().Window.Size = new Size(1024, 768);
+                    //driver.Manage().Window.Size = new Size(1024, 768);
+                    driver.Manage().Window.Maximize();
                     break;
                 case "ie":
                     driver = new InternetExplorerDriver();
@@ -141,7 +176,7 @@ namespace PlmonFuncTestNunit
             _extent.Flush();
             driver.Quit();
         }
-        //public static IEnumerable<String> BrowserToRunWith()
+
         public static IEnumerable<String> BrowserToRunWith()
         {
             String[] browsers = TestsInputData.AutomationSettings.BrowserToRunWith.Split(',');
@@ -157,16 +192,24 @@ namespace PlmonFuncTestNunit
 
         static object[] BrowserUser =
         {
-            new object[] { "ie","ET"},
-            new object[] { "Chrome","UserET"},
+            //new object[] { "ie","ET"},
             new object[] { "Edge", "userSel" },
-        };
-        static object[] BrowserUser1 =
-        {
             new object[] { "Chrome","UserET"}
- 
         };
+        static object[] BrowserUserControlPanel =
+        {
+            new object[] { "Edge", "userSel" },
+            //new object[] { "ie","ET"}
+            //new object[] { "Chrome","ET"}
 
+
+        };
+        static object[] BrowserStyle =
+        {
+            new object[] { "Chrome", "UserET"},
+            //new object[] { "Edge", "userSel" }
+
+        };
 
 
     }

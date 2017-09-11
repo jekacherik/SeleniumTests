@@ -15,8 +15,8 @@ namespace PlmonFuncTestNunit.PageObjects
         {
             PageFactory.InitElements(driver, this);
         }
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_Home_YSTreeView1 > ul > li > ul > li:nth-child(1) > div > a")]
-        public IWebElement leftMenuCP { get; set; }
+        [FindsBy(How = How.Id, Using = "DeskTop_DataList1_ctl12_imgBtn")]
+        public IWebElement topMenuCP { get; set; }
 
 
         [FindsBy(How = How.CssSelector, Using = "#btnAdd > div > span")]
@@ -47,21 +47,23 @@ namespace PlmonFuncTestNunit.PageObjects
 
         public void OpenCP()
         {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.XPath("//*[@id='LeftMenu_Home_YSTreeView1']"))));
-            leftMenuCP.Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.Id("DeskTop_DataList1_ctl12_imgBtn"))));
+            topMenuCP.Click();
 
 
         }
         public void AddRowCancel()
         {
             linkCPFolder.Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.CssSelector("#btnAdd > div > span"))));
+            System.Threading.Thread.Sleep(3000);
+            new WebDriverWait(driver, TimeSpan.FromSeconds(1000)).Until(ExpectedConditions.ElementExists((By.CssSelector("#btnAdd > div > span"))));
             AddRow.Click();
             new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.Id("btnClosePopup"))));
             btnClosePopup.Click();
         }
         public string labelTitle()
         {
+            new WebDriverWait(driver, TimeSpan.FromSeconds(200)).Until(ExpectedConditions.ElementExists((By.Id("lblTitleOfPage"))));
             var title = titleOfPage.Text;
             return title;
         }
