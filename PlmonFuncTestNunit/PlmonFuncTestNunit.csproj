@@ -95,6 +95,7 @@
     <Compile Include="ExtentTestManager.cs" />
     <Compile Include="PageObjects\PageObjectCP.cs" />
     <Compile Include="PageObjects\PageObjectStyle.cs" />
+    <Compile Include="PageObjects\StyleNEWPageObjects.cs" />
     <Compile Include="TestsInputData\AutomationSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,14 +128,6 @@
       <Link>MicrosoftWebDriver.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\packages\WebDriverIEDriver64.2.45.0.0\tools\IEDriverServer-license.txt">
-      <Link>IEDriverServer-license.txt</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\packages\WebDriverIEDriver64.2.45.0.0\tools\IEDriverServer.exe">
-      <Link>IEDriverServer.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="extent-config.xml" />
     <Content Include="Readme.txt" />
   </ItemGroup>
@@ -154,12 +147,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.Firefox.WebDriver.0.18.0\build\Selenium.Firefox.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Firefox.WebDriver.0.18.0\build\Selenium.Firefox.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\Selenium.WebDriver.IEDriver64.3.3.0.1\build\Selenium.WebDriver.IEDriver64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.IEDriver64.3.3.0.1\build\Selenium.WebDriver.IEDriver64.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.15063\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.15063\build\Selenium.WebDriver.MicrosoftWebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.32.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.32.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
   </Target>
   <Import Project="..\packages\Selenium.Firefox.WebDriver.0.18.0\build\Selenium.Firefox.WebDriver.targets" Condition="Exists('..\packages\Selenium.Firefox.WebDriver.0.18.0\build\Selenium.Firefox.WebDriver.targets')" />
-  <Import Project="..\packages\Selenium.WebDriver.IEDriver64.3.3.0.1\build\Selenium.WebDriver.IEDriver64.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver64.3.3.0.1\build\Selenium.WebDriver.IEDriver64.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.15063\build\Selenium.WebDriver.MicrosoftWebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.15063\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.32.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.32.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

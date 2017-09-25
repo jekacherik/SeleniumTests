@@ -98,11 +98,13 @@ namespace PlmonFuncTestNunit
             {
                 case "Chrome":
                     driver = new ChromeDriver();
-                    //driver.Manage().Window.Size = new Size(1024, 768);
-                    driver.Manage().Window.Maximize();
+                    driver.Manage().Window.Size = new Size(1024, 768);
+                    //driver.Manage().Window.Maximize();
                     break;
                 case "ie":
-                    driver = new InternetExplorerDriver();
+                    InternetExplorerOptions ieoptions = new InternetExplorerOptions();
+                    ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = false;
+                    driver = new InternetExplorerDriver(ieoptions);
                     driver.Manage().Window.Maximize();
                     break;
                 case "Edge":
@@ -115,6 +117,9 @@ namespace PlmonFuncTestNunit
             }
             //driver.Manage().Window.Maximize();
             //reports = new Base_Classes.ReportsManager(browserName, TestsInputData.AutomationSettings.BaseUrl);
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(120));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromMinutes(10));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromMinutes(10));
             Goto(TestsInputData.AutomationSettings.BaseUrl);
 
 
@@ -207,7 +212,15 @@ namespace PlmonFuncTestNunit
         static object[] BrowserStyle =
         {
             new object[] { "Chrome", "UserET"},
+            //new object[] { "ie","ET"}
             //new object[] { "Edge", "userSel" }
+
+        };
+        static object[] BrowserLogin =
+        {
+            //new object[] { "Chrome", "veryyyyyyyylonnnnnnnnnnnnnnnggggggggggggggggguuuuuuuseeeeeerrrrrrNammmmmmmmmmme","plmon1234@"},
+            //new object[] { "ie","!@$^$$%^%&^^*&(*(*)())()))_++","veryyyyyyyylonnnnnnnnnnnnnnnggggggggggggggggguuuuuuuseeeeeerrrrrrPaaaaaaaaaaaassss"},
+            new object[] { "Edge", "ET", "!@$^$$%^%&^^*&(*(*)())()))_++" }
 
         };
 

@@ -26,6 +26,10 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "btnSearch")]
         public IWebElement btnSearch { get; set; }
 
+        [FindsBy(How = How.Id, Using = "btnNew")]
+        public IWebElement btnNew { get; set; }
+
+
 
     }
 }

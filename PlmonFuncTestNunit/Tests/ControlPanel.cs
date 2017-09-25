@@ -13,7 +13,7 @@ namespace PlmonFuncTestNunit.Tests
 {
     [TestFixture]
 
-    //[Parallelizable(ParallelScope.Fixtures)]
+    //[Parallelizable]
     public class ControlPanel : PropertiesCollection
     {
 
@@ -21,6 +21,7 @@ namespace PlmonFuncTestNunit.Tests
         [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckOpenCP(String browserName,String user)
         {
+            System.Threading.Thread.Sleep(1000);
             SetUp(browserName);
             System.Threading.Thread.Sleep(3000);
 
@@ -42,10 +43,11 @@ namespace PlmonFuncTestNunit.Tests
 
 
         }
-        [Test, Category("Function test CP")]
+        [Test, Category("Function test Open CP")]
         [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckAddNewFolder(String browserName, String user)
         {
+            System.Threading.Thread.Sleep(1000);
             SetUp(browserName);
             System.Threading.Thread.Sleep(1000);
 
@@ -67,6 +69,7 @@ namespace PlmonFuncTestNunit.Tests
 
             deskPage.AddRowCancel();
             _test.Log(Status.Info, "Open Control Panel link and Click Add Row button");
+            _test.Log(Status.Info, "Open Control Panel link and Click Add Row Cancel");
             _extent.Flush();
         }
 
