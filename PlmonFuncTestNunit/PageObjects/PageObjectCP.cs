@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace PlmonFuncTestNunit.PageObjects
 {
-    public class PageObjectCP : PropertiesCollection
+    public class PageObjectCP : PageBase
     {
-        public PageObjectCP()
-        {
-            PageFactory.InitElements(driver, this);
-        }
+        //public PageObjectCP()
+        //{
+        //    PageFactory.InitElements(driver, this);
+        //}
+        public PageObjectCP(PagesManager factory) : base(factory) { }
+        //public PageObjectCP(PagesManager factory, string windowHandle): base(factory, windowHandle){ }
+
         [FindsBy(How = How.Id, Using = "DeskTop_DataList1_ctl12_imgBtn")]
         public IWebElement topMenuCP { get; set; }
 
@@ -55,11 +58,16 @@ namespace PlmonFuncTestNunit.PageObjects
         public void AddRowCancel()
         {
             linkCPFolder.Click();
-            System.Threading.Thread.Sleep(3000);
-            new WebDriverWait(driver, TimeSpan.FromSeconds(1000)).Until(ExpectedConditions.ElementExists((By.CssSelector("#btnAdd > div > span"))));
-            AddRow.Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.Id("btnClosePopup"))));
-            btnClosePopup.Click();
+            //System.Threading.Thread.Sleep(3000);
+            if(driver.IsElementExists(AddRow))
+            {
+                AddRow.Click();
+                new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.Id("btnClosePopup"))));
+                btnClosePopup.Click();
+            }
+
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(1000)).Until(ExpectedConditions.ElementExists((By.CssSelector("#btnAdd > div > span"))));
+
         }
         public string labelTitle()
         {

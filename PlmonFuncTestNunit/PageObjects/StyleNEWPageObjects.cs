@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace PlmonFuncTestNunit.PageObjects
 {
-    public class StyleNEWPageObjects : PropertiesCollection
+    public class StyleNEWPageObjects : PageBase
     {
-        public StyleNEWPageObjects()
-        {
-            
-             PageFactory.InitElements(driver, this);
-            
-        }
+        //public StyleNEWPageObjects()
+        //{
+
+        //     PageFactory.InitElements(driver, this);
+
+        //}
+        public StyleNEWPageObjects(PagesManager factory) : base(factory) { }
+        public StyleNEWPageObjects(PagesManager factory, string windowHandle): base(factory, windowHandle){ }
         [FindsBy(How = How.Id, Using = "imgBtnNext")]
         public IWebElement btnNext { get; set; }
 

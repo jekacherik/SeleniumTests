@@ -65,6 +65,7 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
@@ -88,13 +89,14 @@
   <ItemGroup>
     <Compile Include="Base Classes\BaseReport.cs" />
     <Compile Include="Base Classes\GetSreenShot.cs" />
-    <Compile Include="Base Classes\Pages.cs" />
-    <Compile Include="Base Classes\Reports.cs" />
-    <Compile Include="Base Classes\ReportsManager.cs" />
     <Compile Include="Base Classes\ExtentManager.cs" />
+    <Compile Include="Base Classes\TestsConfiguration.cs" />
+    <Compile Include="Base Classes\WebDriverFactory.cs" />
     <Compile Include="ExtentTestManager.cs" />
+    <Compile Include="PageObjects\PageBase.cs" />
     <Compile Include="PageObjects\PageObjectCP.cs" />
     <Compile Include="PageObjects\PageObjectStyle.cs" />
+    <Compile Include="PageObjects\PagesManager.cs" />
     <Compile Include="PageObjects\StyleNEWPageObjects.cs" />
     <Compile Include="TestsInputData\AutomationSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -102,8 +104,6 @@
       <DependentUpon>AutomationSettings.resx</DependentUpon>
     </Compile>
     <Compile Include="PageObjects\BasePageObject.cs" />
-    <Compile Include="Base Classes\Browsers.cs" />
-    <Compile Include="PageObjects\EAPageObjects.cs" />
     <Compile Include="Base Classes\ExelUnit.cs" />
     <Compile Include="Tests\ControlPanel.cs" />
     <Compile Include="Tests\Login.cs" />

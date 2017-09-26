@@ -3,18 +3,11 @@ using AventStack.ExtentReports.Reporter;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PlmonFuncTestNunit.Base_Classes;
-using System.Drawing;
-using OpenQA.Selenium.Support.Events;
+using OpenQA.Selenium.Support.Extensions;
+using PlmonFuncTestNunit.PageObjects;
 
 namespace PlmonFuncTestNunit
 {
@@ -27,19 +20,22 @@ namespace PlmonFuncTestNunit
         Xpath
 
     }
-    //[SetUpFixture]
+
     public class PropertiesCollection : GetSreenShot
     {
         //Auto-implemented property
         protected ExtentReports _extent;
         protected ExtentTest _test;
         public static IWebDriver driver;
-         
-        //public static Base_Classes.ReportsManager reports;
+        protected TestsConfiguration _config = null;
+        protected PagesManager _pages = null;
+
 
         [OneTimeSetUp]
         protected void StartReport()
         {
+ 
+            _config = TestsConfiguration.Instance;
             //Setting project path
             string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
             string actualPath = pth.Substring(0, pth.IndexOf("bin"));
@@ -55,72 +51,20 @@ namespace PlmonFuncTestNunit
 
 
         }
-        static void firingDriver_ExceptionThrown(object sender, WebDriverExceptionEventArgs e)
-        {
-            Console.WriteLine(e.ThrownException.Message);
-        }
 
-        static void firingDriver_ElementClicked(object sender, WebElementEventArgs e)
-        {
-            Console.WriteLine(e.Element);
-            string URL = driver.Url;
-            Char delimiter = '?';
-            String[] substrings = URL.Split(delimiter);
-            var parseUrl = substrings[0];
-            if (parseUrl == "http://uiprototype80.dyn.yuniquecloud.com/plmOn/CustomError.aspx")
-            {
-                Assert.Fail("Found OOps!!!");
-            }
-        }
-
-        static void firingDriver_FindElementCompleted(object sender, FindElementEventArgs e)
-        {
-            Console.WriteLine(e.FindMethod);
-        }
-        ////[OneTimeSetUp]
-
-        public void SetUp(String browserName)
+        public void SetUp(String browserName, String user)
         {
 
+            //Init test Name to log
             _test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
-            var firingDriver = new EventFiringWebDriver(driver);
-            firingDriver.ExceptionThrown +=
-                new EventHandler<WebDriverExceptionEventArgs>(firingDriver_ExceptionThrown);
-
-            firingDriver.ElementClicked +=
-                new EventHandler<WebElementEventArgs>(firingDriver_ElementClicked);
-
-            firingDriver.FindElementCompleted +=
-                new EventHandler<FindElementEventArgs>(firingDriver_FindElementCompleted);
-
-            driver = firingDriver;
-            switch (browserName)
-            {
-                case "Chrome":
-                    driver = new ChromeDriver();
-                    driver.Manage().Window.Size = new Size(1024, 768);
-                    //driver.Manage().Window.Maximize();
-                    break;
-                case "ie":
-                    InternetExplorerOptions ieoptions = new InternetExplorerOptions();
-                    ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = false;
-                    driver = new InternetExplorerDriver(ieoptions);
-                    driver.Manage().Window.Maximize();
-                    break;
-                case "Edge":
-                    driver = new EdgeDriver();
-                    driver.Manage().Window.Size = new Size(1920, 1080);
-                    break;
-                //case "Firefox":
-                //    driver = new FirefoxDriver();
-                //    break;
-            }
-            //driver.Manage().Window.Maximize();
-            //reports = new Base_Classes.ReportsManager(browserName, TestsInputData.AutomationSettings.BaseUrl);
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(120));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromMinutes(10));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromMinutes(10));
-            Goto(TestsInputData.AutomationSettings.BaseUrl);
+            //Init Web driver  
+            driver = WebDriverFactory.GetWebDriver(browserName);
+            driver.Manage().Timeouts().ImplicitWait = _config.ImplicitlyWait;
+            driver.Manage().Timeouts().PageLoad = _config.PageLoadWait;
+            //init Page Manager 
+            _pages = new PagesManager(driver);
+            //Checking user authorization 
+            IsLogin(user);
 
 
         }
@@ -129,11 +73,31 @@ namespace PlmonFuncTestNunit
         {
             _extent.Flush();
         }
-
+        public void IsLogin(String user)
+        {
+            //Go to Desk Page
+            Goto(_config.PlmUrl);
+            //If User not login 
+            if (driver.Url.IndexOf("/BI/BI_Main.aspx", StringComparison.OrdinalIgnoreCase) == -1)
+            {
+                //Go to Login page
+                driver.Navigate().GoToUrl(_config.PlmUrlDef);
+                var pagelogin = _pages.GetPage<LoginPageObjects>();
+                //Get data for test User from Test and pass in config 
+                pagelogin.Login(user, _config.Password);
+                _test.Log(Status.Info, user+" Login in the system");
+                _extent.Flush();
+            }
+            else
+            {
+                _test.Log(Status.Info, "User already logged In ");
+                _extent.Flush();
+                driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
+            }
+        }
         public static void Goto(string url)
         {
             driver.Url = url;
-            //reports.verifyURL(url);
         }
         public static string Title
         {
@@ -203,9 +167,9 @@ namespace PlmonFuncTestNunit
         };
         static object[] BrowserUserControlPanel =
         {
-            new object[] { "Edge", "userSel" },
+            //new object[] { "Edge", "userSel" },
             //new object[] { "ie","ET"}
-            //new object[] { "Chrome","ET"}
+            new object[] { "Chrome","ET"}
 
 
         };
@@ -219,8 +183,8 @@ namespace PlmonFuncTestNunit
         static object[] BrowserLogin =
         {
             //new object[] { "Chrome", "veryyyyyyyylonnnnnnnnnnnnnnnggggggggggggggggguuuuuuuseeeeeerrrrrrNammmmmmmmmmme","plmon1234@"},
-            //new object[] { "ie","!@$^$$%^%&^^*&(*(*)())()))_++","veryyyyyyyylonnnnnnnnnnnnnnnggggggggggggggggguuuuuuuseeeeeerrrrrrPaaaaaaaaaaaassss"},
-            new object[] { "Edge", "ET", "!@$^$$%^%&^^*&(*(*)())()))_++" }
+            new object[] { "ie","ET","plmon1234@111"}
+            //new object[] { "Edge", "ET", "!@$^$$%^%&^^*&(*(*)())()))_++" }
 
         };
 

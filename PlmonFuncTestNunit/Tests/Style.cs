@@ -2,10 +2,7 @@
 using NUnit.Framework;
 using System;
 using PlmonFuncTestNunit.PageObjects;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
@@ -25,22 +22,10 @@ namespace PlmonFuncTestNunit.Tests
         [TestCaseSource(typeof(PropertiesCollection), "BrowserStyle")]
         public void CheckOpenStyle(String browserName, String user)
         {
-            //Init Driver go to URL
-            System.Threading.Thread.Sleep(1000);
-            SetUp(browserName);
-            System.Threading.Thread.Sleep(10000);
-
-            //Login in the System
-            LoginPageObjects pagelogin = new LoginPageObjects();
-            //Get data for test in xml
-            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
-
-            //Add info to the Log
-            _test.Log(Status.Info, "User Login in the system");
-            _extent.Flush();
-
+            //Init Driver go to URL and check is Login user
+            SetUp(browserName,user);
             // Go To Style Folder
-            PageObjectStyle pageStyle = new PageObjectStyle();
+            var pageStyle = _pages.GetPage<PageObjectStyle>();
             _test.Log(Status.Info, "Go to Style Folder");
             _extent.Flush();
             pageStyle.btnStyleDesk.Click();
@@ -72,21 +57,10 @@ namespace PlmonFuncTestNunit.Tests
         public void CheckCreateStyle(String browserName, String user)
         {
             //Init Driver go to URL
-            System.Threading.Thread.Sleep(3000);
-            SetUp(browserName);
-            System.Threading.Thread.Sleep(10000);
-
-            //Login in the System
-            LoginPageObjects pagelogin = new LoginPageObjects();
-            //Get data for test in xml
-            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
-
-            //Add info to the Log
-            _test.Log(Status.Info, "UserAuto Login in the system");
-            _extent.Flush();
+            SetUp(browserName,user);
 
             // Go To Style Folder
-            PageObjectStyle pageStyle = new PageObjectStyle();
+            var pageStyle = _pages.GetPage<PageObjectStyle>(); 
             _test.Log(Status.Info, "UserAuto go to Style Folder " + driver.Url);
             _extent.Flush();
             pageStyle.btnStyleDesk.Click();
@@ -103,7 +77,7 @@ namespace PlmonFuncTestNunit.Tests
             _extent.Flush();
 
             System.Threading.Thread.Sleep(5000);
-            StyleNEWPageObjects pageNew = new StyleNEWPageObjects();
+            var pageNew = _pages.GetPage<StyleNEWPageObjects>(); 
 
             //Check page New Header
             var textHeaderNew = pageNew.NewPagelblHeader.Text;

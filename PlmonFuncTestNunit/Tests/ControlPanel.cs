@@ -21,19 +21,9 @@ namespace PlmonFuncTestNunit.Tests
         [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckOpenCP(String browserName,String user)
         {
-            System.Threading.Thread.Sleep(1000);
-            SetUp(browserName);
-            System.Threading.Thread.Sleep(3000);
-
-            //Login in the System
-            LoginPageObjects pagelogin = new LoginPageObjects();
-            //Get data for test in xml
-            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
-            _test.Log(Status.Info, "User Login in the system");
-            _extent.Flush();
-
+            SetUp(browserName,user);
             //Open CP in menu
-            PageObjectCP deskPage = new PageObjectCP();
+            var deskPage = _pages.GetPage<PageObjectCP>();
 
             deskPage.OpenCP();
             System.Threading.Thread.Sleep(3000);
@@ -47,18 +37,8 @@ namespace PlmonFuncTestNunit.Tests
         [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckAddNewFolder(String browserName, String user)
         {
-            System.Threading.Thread.Sleep(1000);
-            SetUp(browserName);
-            System.Threading.Thread.Sleep(1000);
-
-            LoginPageObjects pagelogin = new LoginPageObjects();
-            //Get data for test in xml
-            pagelogin.Login(user, TestsInputData.AutomationSettings.Password);
-
-            _test.Log(Status.Info, "User Login in the system");
-            _extent.Flush();
-
-            PageObjectCP deskPage = new PageObjectCP();
+            SetUp(browserName,user);
+            var deskPage = _pages.GetPage<PageObjectCP>();
 
             deskPage.OpenCP();
             System.Threading.Thread.Sleep(3000);

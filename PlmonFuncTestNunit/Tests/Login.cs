@@ -23,7 +23,7 @@ namespace PlmonFuncTestNunit
         //public void VerifyValidLogin(String browserName, String user)
         //{
 
-        //    SetUp(browserName);
+        //    SetUp(browserName,user);
         //    System.Threading.Thread.Sleep(3000);
         //    LoginPageObjects pagelogin = new LoginPageObjects();
         //    Get data for test in xml
@@ -58,7 +58,7 @@ namespace PlmonFuncTestNunit
         [TestCaseSource(typeof(PropertiesCollection), "BrowserLogin")]
         public void VerifyInValidLogin(String browserName,String user, String pass)
         {
-            SetUp(browserName);
+            SetUp(browserName,user);
             //driver.Url = TestsInputData.AutomationSettings.BaseUrl;
             System.Threading.Thread.Sleep(1000);
             IWebElement userName = driver.FindElement(By.Id("txtUserName"));
