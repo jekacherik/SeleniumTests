@@ -6,6 +6,8 @@ using System.Linq;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using PlmonFuncTestNunit.TestsInputData;
+using System.Collections.Generic;
 
 namespace PlmonFuncTestNunit.Tests
 {
@@ -19,11 +21,15 @@ namespace PlmonFuncTestNunit.Tests
         //public string existingWindowHandle { get; private set; }
 
         [Test, Category("Function tests Style")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserStyle")]
-        public void CheckOpenStyle(String browserName, String user)
+        [TestCaseSource("StyleData")]
+        public void CheckOpenStyle(string browserName, string user)
         {
+            
+            //var user = ExelUnit.GetDataFromSheet(_config.TestDataSheetPath, "Login",1,"User");
+            //var browserName = ExelUnit.GetDataFromSheet(_config.TestDataSheetPath, "Login", 1, "BrowserName");
+
             //Init Driver go to URL and check is Login user
-            SetUp(browserName,user);
+            SetUp(browserName, user);
             // Go To Style Folder
             var pageStyle = _pages.GetPage<PageObjectStyle>();
             _test.Log(Status.Info, "Go to Style Folder");
@@ -104,6 +110,16 @@ namespace PlmonFuncTestNunit.Tests
             _extent.Flush();
         }
 
-
+        public static IEnumerable<TestCaseData> StyleData
+        {
+            get
+            {
+                List<TestCaseData> testCaseDataList = new ExelUnit().ReadExcelData(@"C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\TestsInputData\TestData.xlsx");
+                if (testCaseDataList != null)
+                    foreach (TestCaseData testCaseData in testCaseDataList)
+                        yield return testCaseData;
+            }
+        }
     }
+
 }

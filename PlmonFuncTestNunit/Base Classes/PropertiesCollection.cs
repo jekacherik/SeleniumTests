@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using PlmonFuncTestNunit.Base_Classes;
 using OpenQA.Selenium.Support.Extensions;
 using PlmonFuncTestNunit.PageObjects;
+using PlmonFuncTestNunit.TestsInputData;
 
 namespace PlmonFuncTestNunit
 {
@@ -30,12 +31,15 @@ namespace PlmonFuncTestNunit
         protected TestsConfiguration _config = null;
         protected PagesManager _pages = null;
 
+        
+
 
         [OneTimeSetUp]
         protected void StartReport()
         {
  
             _config = TestsConfiguration.Instance;
+
             //Setting project path
             string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
             string actualPath = pth.Substring(0, pth.IndexOf("bin"));
@@ -50,13 +54,16 @@ namespace PlmonFuncTestNunit
             _extent.AttachReporter(htmlReporter);
 
 
+
         }
 
         public void SetUp(String browserName, String user)
         {
 
+
             //Init test Name to log
             _test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
+
             //Init Web driver  
             driver = WebDriverFactory.GetWebDriver(browserName);
             driver.Manage().Timeouts().ImplicitWait = _config.ImplicitlyWait;
@@ -95,6 +102,7 @@ namespace PlmonFuncTestNunit
                 driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
             }
         }
+
         public static void Goto(string url)
         {
             driver.Url = url;
@@ -175,7 +183,7 @@ namespace PlmonFuncTestNunit
         };
         static object[] BrowserStyle =
         {
-            new object[] { "Chrome", "UserET"},
+            new object[] { "Chrome","ET"},
             //new object[] { "ie","ET"}
             //new object[] { "Edge", "userSel" }
 

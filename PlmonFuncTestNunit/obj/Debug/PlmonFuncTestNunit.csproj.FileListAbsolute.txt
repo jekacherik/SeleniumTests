@@ -45,3 +45,5 @@ C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNuni
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.pdb
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csprojResolveAssemblyReference.cache
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Dapper.dll
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Dapper.xml
