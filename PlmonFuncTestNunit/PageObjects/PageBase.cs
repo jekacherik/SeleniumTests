@@ -26,5 +26,8 @@ namespace PlmonFuncTestNunit.PageObjects
             if (windowHandle != driver.CurrentWindowHandle) driver.SwitchTo().Window(windowHandle);
         }
         public string WindowHandle => _windowHandle;
+
+
+
     }
 }

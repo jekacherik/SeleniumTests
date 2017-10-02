@@ -28,8 +28,8 @@ namespace PlmonFuncTestNunit.Tests
             deskPage.OpenCP();
             System.Threading.Thread.Sleep(3000);
             Assert.AreEqual("Control Panel", deskPage.labelTitle(), "Element found");
-            _test.Log(Status.Info, "Open Control Panel link");
-            _extent.Flush();
+            //_test.Log(Status.Info, "Open Control Panel link");
+            //_extent.Flush();
 
 
         }
@@ -43,14 +43,14 @@ namespace PlmonFuncTestNunit.Tests
             deskPage.OpenCP();
             System.Threading.Thread.Sleep(3000);
             Assert.AreEqual( "Control Panel", deskPage.labelTitle(), "Element found");
-            _test.Log(Status.Info, "Open Control Panel link");
-            _extent.Flush();
+            //_test.Log(Status.Info, "Open Control Panel link");
+            //_extent.Flush();
 
 
             deskPage.AddRowCancel();
-            _test.Log(Status.Info, "Open Control Panel link and Click Add Row button");
-            _test.Log(Status.Info, "Open Control Panel link and Click Add Row Cancel");
-            _extent.Flush();
+            //_test.Log(Status.Info, "Open Control Panel link and Click Add Row button");
+            //_test.Log(Status.Info, "Open Control Panel link and Click Add Row Cancel");
+            //_extent.Flush();
         }
 
     }

@@ -43,6 +43,42 @@ namespace PlmonFuncTestNunit
                 return false;
             }
         }
+
+        public static void WaitForPageLoad(this IWebDriver driver)
+        {
+            var timeout = new TimeSpan(0, 0, 30);
+            var wait = new WebDriverWait(driver, timeout);
+
+            var javascript = driver as IJavaScriptExecutor;
+            if (javascript == null)
+                throw new ArgumentException("Driver must support javascript execution");
+
+            wait.Until(d =>
+            {
+                try
+                {
+                    string readyState = javascript.ExecuteScript(
+                    "if (document.readyState) return document.readyState;").ToString();
+                    return readyState.ToLower() == "complete";
+                }
+                catch (InvalidOperationException e)
+                {
+                    //Window is no longer available
+                    return e.Message.ToLower().Contains("unable to get browser");
+                }
+                catch (WebDriverException e)
+                {
+                    //Browser is no longer available
+                    return e.Message.ToLower().Contains("unable to connect");
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            });
+        }
+
+
         /// <summary>
         /// Method for POM pages
         /// </summary>

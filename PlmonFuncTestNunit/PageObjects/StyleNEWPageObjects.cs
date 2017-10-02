@@ -1,23 +1,20 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PlmonFuncTestNunit.Base_Classes;
 
 namespace PlmonFuncTestNunit.PageObjects
 {
     public class StyleNEWPageObjects : PageBase
     {
-        //public StyleNEWPageObjects()
-        //{
-
-        //     PageFactory.InitElements(driver, this);
-
-        //}
         public StyleNEWPageObjects(PagesManager factory) : base(factory) { }
         public StyleNEWPageObjects(PagesManager factory, string windowHandle): base(factory, windowHandle){ }
+        [FindsBy(How = How.Id, Using = "btnNew")]
+        private IWebElement CreateStyleButton { get; set; }
+
         [FindsBy(How = How.Id, Using = "imgBtnNext")]
         public IWebElement btnNext { get; set; }
 
@@ -44,10 +41,26 @@ namespace PlmonFuncTestNunit.PageObjects
 
 
 
-
-
-
-
-
+        public void CheckValidators()
+        {
+            var textHeaderNew = NewPagelblHeader.Text;
+            Assert.AreEqual("New Style...", textHeaderNew, "Text not found!!!");
+            PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto go to Page " + textHeaderNew + "<br>" + driver.Url + "</br>");
+            btnNext.Click();
+            PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto Click the btnNext " + textHeaderNew + "<br>" + driver.Url + "</br>");
+            //Check Validators
+            new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementIsVisible((By.Id("ctl07"))));
+            error_icon.Click();
+            bool isValidatorDisplayed = error_icon.Displayed;
+            Assert.AreEqual(true, isValidatorDisplayed, "Validator wasn't find");
+            //Click btn Close
+            btnClose.Click();
+            PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto click button Close");
+        }
     }
+
+
+
+
 }
+

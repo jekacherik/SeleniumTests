@@ -64,21 +64,21 @@ namespace PlmonFuncTestNunit
             IWebElement userName = driver.FindElement(By.Id("txtUserName"));
             userName.Click();
             userName.SendKeys(user);
-            _test.Log(Status.Info, "User Name: " + user);
+            //_test.Log(Status.Info, "User Name: " + user);
             System.Threading.Thread.Sleep(1000);
             IWebElement userPass = driver.FindElement(By.Id("txtUserPass"));
             userPass.SendKeys(pass);
-            _test.Log(Status.Info, "User Pass: " + pass);
+            //_test.Log(Status.Info, "User Pass: " + pass);
             IWebElement loginBtn = driver.FindElement(By.Id("cmdLogin"));
             loginBtn.Click();
-            _test.Log(Status.Info, "Click btn Login ");
+            //_test.Log(Status.Info, "Click btn Login ");
             new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementIsVisible((By.Id("lblMsg"))));
             IWebElement warningMsg = driver.FindElement(By.Id("lblMsg"));
             bool textMsg = warningMsg.Displayed;
             Assert.AreEqual(true, textMsg, "Not found warning !!!");
 
-            _test.Log(Status.Info, "Check exists warning message: "+ warningMsg.Text);
-            _extent.Flush();
+            //_test.Log(Status.Info, "Check exists warning message: "+ warningMsg.Text);
+            //_extent.Flush();
         }
 
     }

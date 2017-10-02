@@ -94,7 +94,8 @@
     <Compile Include="Base Classes\BaseReport.cs" />
     <Compile Include="Base Classes\GetSreenShot.cs" />
     <Compile Include="Base Classes\ExtentManager.cs" />
-    <Compile Include="Base Classes\TestCaseDataItem.cs" />
+    <Compile Include="Base Classes\ReportingManager.cs" />
+    <Compile Include="Base Classes\ReportingTasks.cs" />
     <Compile Include="Base Classes\TestsConfiguration.cs" />
     <Compile Include="Base Classes\WebDriverFactory.cs" />
     <Compile Include="ExtentTestManager.cs" />

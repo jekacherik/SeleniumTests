@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +33,19 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "btnNew")]
         public IWebElement btnNew { get; set; }
 
+        public StyleNEWPageObjects ClickNewStyle()
+        {
+            PopupWindowFinder wndFinder = new PopupWindowFinder(driver);
+            string newWndHandle = wndFinder.Click(btnNew);
+            return new StyleNEWPageObjects(_pagesFactory, newWndHandle);
+        }
 
+        public void OpenStyle()
+        {
+            btnStyleDesk.Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementExists((By.Id("lblHeader"))));
+            Assert.AreEqual("Style Folder", lblHeader.Text, "Text not found!!!");
+        }
 
     }
 }

@@ -30,6 +30,7 @@
         <!-- slideout menu -->
         <ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
             <li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+                <li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
                         <li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
         </ul>
 
@@ -43,7 +44,7 @@
         <ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 
             <a>
-                <span class='suite-start-time label blue darken-3'>02.10.2017 13:14:41 Финляндия (зима)</span>
+                <span class='suite-start-time label blue darken-3'>02.10.2017 17:23:45 Финляндия (зима)</span>
             </a>
             <a>
                 <span class="label blue darken-3">v3.0.2</span>
@@ -78,6 +79,16 @@
             <!-- test toggle -->
 
             <!-- category toggle -->
+                <div class='chip transparent'>
+                    <a class='dropdown-button category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+                        <i class='material-icons'>local_offer</i> Category
+                    </a>
+                    <ul id='category-toggle' class='dropdown-content'>
+                            <li><a href='#'>Smoke</a></li>
+                        <li class='divider'></li>
+                        <li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
+                    </ul>
+                </div>
             <!-- category toggle -->
 
             <!-- clear filters -->
@@ -141,7 +152,7 @@
                         <span><span class='strong'>1</span> step(s) passed</span>
                     </div>
                     <div class='block text-small'>
-                        <span class='strong'>0</span> step(s) failed, <span class='strong'>2</span> others
+                        <span class='strong'>0</span> step(s) failed, <span class='strong'>5</span> others
                     </div>
                 </div>
             </div>
@@ -158,16 +169,24 @@
 
                     <li class='test displayed active  pass' status='pass' test-id='1'>
                         <div class='test-heading'>
-                            <span class='test-name'>CheckCreateStyle("Chrome","ET")</span>
-                            <span class='test-time'>02.10.2017 13:14:41</span>
+                            <span class='test-name'><h4>PlmonFuncTestNunit.Tests.Style</h4><br>CheckCreateStyle("Chrome","ET")</span>
+                            <span class='test-time'>02.10.2017 17:23:45</span>
                             <span class='test-status right pass'>Pass</span>
                         </div>
                         <div class='test-content hide'>
                                 <div class='test-time-info'>
-                                    <span class='label start-time'>02.10.2017 13:14:41</span>
-                                    <span class='label end-time'>02.10.2017 13:15:23</span>
-                                    <span class='label time-taken grey lighten-1 white-text'>00:00:41.7708970</span>
+                                    <span class='label start-time'>02.10.2017 17:23:45</span>
+                                    <span class='label end-time'>02.10.2017 17:24:48</span>
+                                    <span class='label time-taken grey lighten-1 white-text'>00:01:02.7570036</span>
                                 </div>
+                                    <div class='test-attributes'>
+                                            <div class='category-list'>
+                                                    <span class='category label white-text'>Smoke</span>
+                                            </div>
+                                                                                    <div class='author-list'>
+                                                    <span class='author label white-text'>Evgenia</span>
+                                            </div>
+                                    </div>
                                     <div class='test-steps'>
                                         <table class='bordered table-results'>
                                             <thead>
@@ -180,17 +199,32 @@
                                             <tbody>
                                                     <tr class='log' status='info'>
                                                         <td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-                                                        <td class='timestamp'>02.10.2017 13:15:01</td>
+                                                        <td class='timestamp'>02.10.2017 17:24:14</td>
                                                         <td class='step-details'>ET Login in the system</td>
                                                     </tr>
                                                     <tr class='log' status='info'>
                                                         <td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-                                                        <td class='timestamp'>02.10.2017 13:15:05</td>
-                                                        <td class='step-details'>UserAuto go to Style Folder http://uiprototype80.dyn.yuniquecloud.com/YuniqueBI/BI/BI_Main.aspx?BIFIID=&TID=</td>
+                                                        <td class='timestamp'>02.10.2017 17:24:14</td>
+                                                        <td class='step-details'>UserAuto go to Style Folder <br>http://uiprototype80.dyn.yuniquecloud.com/YuniqueBI/BI/BI_Main.aspx?BIFIID=&TID=</br></td>
+                                                    </tr>
+                                                    <tr class='log' status='info'>
+                                                        <td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+                                                        <td class='timestamp'>02.10.2017 17:24:47</td>
+                                                        <td class='step-details'>UserAuto go to Page New Style...<br>http://uiprototype80.dyn.yuniquecloud.com/plmOn/Style/Style_New.aspx?ST=0&SID=72cd3002-e0ce-473b-91d1-9b1211f326d4&SDID=</br></td>
+                                                    </tr>
+                                                    <tr class='log' status='info'>
+                                                        <td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+                                                        <td class='timestamp'>02.10.2017 17:24:48</td>
+                                                        <td class='step-details'>UserAuto Click the btnNext New Style...<br>http://uiprototype80.dyn.yuniquecloud.com/plmOn/Style/Style_New.aspx?ST=0&SID=72cd3002-e0ce-473b-91d1-9b1211f326d4&SDID=</br></td>
+                                                    </tr>
+                                                    <tr class='log' status='info'>
+                                                        <td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+                                                        <td class='timestamp'>02.10.2017 17:24:48</td>
+                                                        <td class='step-details'>UserAuto click button Close</td>
                                                     </tr>
                                                     <tr class='log' status='pass'>
                                                         <td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-                                                        <td class='timestamp'>02.10.2017 13:15:23</td>
+                                                        <td class='timestamp'>02.10.2017 17:24:48</td>
                                                         <td class='step-details'>Test ended with Pass</td>
                                                     </tr>
                                             </tbody>
@@ -224,7 +258,72 @@
 
 </div>
 <!-- test view -->
-            <!-- category view -->
+            <div id='category-view' class='view hide'>
+        <section id='controls'>
+            <div class='controls grey lighten-4'>
+                <!-- search -->
+                <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                    <a href="#" class='search-div'>
+                        <i class='material-icons'>search</i> Search
+                    </a>
+
+                    <div class='input-field left hide'>
+                        <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                    </div>
+
+                </div>
+                <!-- search -->
+            </div>
+        </section>
+
+        <div class='subview-left left'>
+
+            <div class='view-summary'>
+                <h5>Categories</h5>
+                <ul id='category-collection' class='category-collection'>
+
+                        <li class='category displayed active'>
+                            <div class='category-heading'>
+                                <span class='category-name'>Smoke</span>
+                                <span class='category-status right'>
+ <span class='label pass'>1</span>                                                                                                         </span>
+                            </div>
+                            <div class='category-content hide'>
+                                <div class='category-status-counts'>
+ <span class='label green accent-4 white-text'>Passed: 1</span>                                                                                                         </div>
+
+                                <div class='category-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                            <tr>
+                                                <th>Timestamp</th>
+                                                <th>TestName</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                    <td>02.10.2017 17:23:45</td>
+                                                    <td class='linked' test-id='1'><h4>PlmonFuncTestNunit.Tests.Style</h4><br>CheckCreateStyle("Chrome","ET")</td>
+                                                    <td><span class='test-status pass'>Pass</span></td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class='subview-right left'>
+            <div class='view-summary'>
+                <h5 class='category-name'></h5>
+            </div>
+        </div>
+    </div>
+<!-- category view -->
             
 
 
@@ -278,29 +377,49 @@
             </div>
             <div class='col s2'>
                 <div class='card-panel r'>
- <span>Steps</span>                     <div class='panel-lead'>3</div>
+ <span>Steps</span>                     <div class='panel-lead'>6</div>
                 </div>
             </div>
             <div class='col s2'>
                 <div class='card-panel r'>
                     Start
-                    <div class='panel-lead'>02.10.2017 13:14:41</div>
+                    <div class='panel-lead'>02.10.2017 17:23:45</div>
                 </div>
             </div>
             <div class='col s2'>
                 <div class='card-panel r'>
                     End
-                    <div class='panel-lead'>02.10.2017 13:15:23</div>
+                    <div class='panel-lead'>02.10.2017 17:24:53</div>
                 </div>
             </div>
             <div class='col s2'>
                 <div class='card-panel r'>
                     Time Taken
-                    <div class='panel-lead'>00:00:42.3270236</div>
+                    <div class='panel-lead'>00:01:08.0586438</div>
                 </div>
             </div>
 
 
+                <div class='col s4'>
+                    <div class='card-panel'>
+                        <span class='right label cyan white-text'>Categories</span><p>&nbsp;</p>
+
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Passed</th>
+                                <th>Failed</th>
+                                <th>Others</th>
+                            </tr>
+                                <tr>
+                                    <td>Smoke</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
@@ -328,7 +447,7 @@
 			    errorChild: 0,
 			    warningChild: 0,
 			    skipChild: 0,
-			    infoChild: 2,
+			    infoChild: 5,
 				
 			    passGrandChild: 0,
 			    failGrandChild: 0,

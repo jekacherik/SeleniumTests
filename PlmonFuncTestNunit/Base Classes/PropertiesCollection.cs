@@ -25,13 +25,13 @@ namespace PlmonFuncTestNunit
     public class PropertiesCollection : GetSreenShot
     {
         //Auto-implemented property
-        protected ExtentReports _extent;
-        protected ExtentTest _test;
+        //protected ExtentReports _extent;
+        //protected ExtentTest _test;
         public static IWebDriver driver;
         protected TestsConfiguration _config = null;
         protected PagesManager _pages = null;
+        public static ReportingTasks _reportingTasks;
 
-        
 
 
         [OneTimeSetUp]
@@ -40,18 +40,10 @@ namespace PlmonFuncTestNunit
  
             _config = TestsConfiguration.Instance;
 
-            //Setting project path
-            string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
-            string actualPath = pth.Substring(0, pth.IndexOf("bin"));
-            string projectPth = new Uri(actualPath).LocalPath;
 
+            ExtentReports extentReports = ReportingManager.Instance;
 
-            var dir = TestContext.CurrentContext.TestDirectory + "Reports\\";
-            var fileName = this.GetType().ToString() + ".html";
-            var htmlReporter = new ExtentHtmlReporter(projectPth + "\\Reports\\" + fileName);
-            htmlReporter.Configuration().ReportName = "Plmon function Tests";
-            _extent = new ExtentReports();
-            _extent.AttachReporter(htmlReporter);
+            _reportingTasks = new ReportingTasks(extentReports);
 
 
 
@@ -62,7 +54,7 @@ namespace PlmonFuncTestNunit
 
 
             //Init test Name to log
-            _test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
+            _reportingTasks.InitializeTest();
 
             //Init Web driver  
             driver = WebDriverFactory.GetWebDriver(browserName);
@@ -78,7 +70,7 @@ namespace PlmonFuncTestNunit
         [OneTimeTearDown]
         protected void TearDown()
         {
-            _extent.Flush();
+            _reportingTasks.SaveReport();
         }
         public void IsLogin(String user)
         {
@@ -90,15 +82,15 @@ namespace PlmonFuncTestNunit
                 //Go to Login page
                 driver.Navigate().GoToUrl(_config.PlmUrlDef);
                 var pagelogin = _pages.GetPage<LoginPageObjects>();
+
                 //Get data for test User from Test and pass in config 
                 pagelogin.Login(user, _config.Password);
-                _test.Log(Status.Info, user+" Login in the system");
-                _extent.Flush();
+
+                _reportingTasks.Log(Status.Info, user + " Login in the system");
+
             }
             else
             {
-                _test.Log(Status.Info, "User already logged In ");
-                _extent.Flush();
                 driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
             }
         }
@@ -118,39 +110,7 @@ namespace PlmonFuncTestNunit
         [TearDown]
         public void Cleanup()
         {
-            string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
-            var sreenName = this.GetType().ToString() + ".png";
-            string actualPath = pth.Substring(0, pth.IndexOf("bin")) + ("Reports\\Screens\\" + sreenName);
-            string projectPth = new Uri(actualPath).LocalPath;
-
-            var status = TestContext.CurrentContext.Result.Outcome.Status;
-            var errorMassege = TestContext.CurrentContext.Result.Message;
-            var stacktrace = string.IsNullOrEmpty(TestContext.CurrentContext.Result.StackTrace)
-                    ? ""
-                    : string.Format("{0}", TestContext.CurrentContext.Result.StackTrace);
-            Status logstatus;
-            string screenShotPath;
-            switch (status)
-            {
-                case TestStatus.Failed:
-                    logstatus = Status.Fail;
-                    screenShotPath = Capture(driver, "testScreen");
-                    _test.Log(logstatus, "See screen below !!! " + _test.AddScreenCaptureFromPath(screenShotPath));
-                    _extent.Flush();
-                    break;
-                case TestStatus.Inconclusive:
-                    logstatus = Status.Warning;
-                    break;
-                case TestStatus.Skipped:
-                    logstatus = Status.Skip;
-                    break;
-                default:
-                    logstatus = Status.Pass;
-                    break;
-            }
-
-            _test.Log(logstatus, "Test ended with " + logstatus + errorMassege+ stacktrace);         
-            _extent.Flush();
+            _reportingTasks.FinalizeTest(driver);
             driver.Quit();
         }
 
