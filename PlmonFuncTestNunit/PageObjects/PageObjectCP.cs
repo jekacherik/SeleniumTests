@@ -11,12 +11,8 @@ namespace PlmonFuncTestNunit.PageObjects
 {
     public class PageObjectCP : PageBase
     {
-        //public PageObjectCP()
-        //{
-        //    PageFactory.InitElements(driver, this);
-        //}
+
         public PageObjectCP(PagesManager factory) : base(factory) { }
-        //public PageObjectCP(PagesManager factory, string windowHandle): base(factory, windowHandle){ }
 
         [FindsBy(How = How.Id, Using = "DeskTop_DataList1_ctl12_imgBtn")]
         public IWebElement topMenuCP { get; set; }

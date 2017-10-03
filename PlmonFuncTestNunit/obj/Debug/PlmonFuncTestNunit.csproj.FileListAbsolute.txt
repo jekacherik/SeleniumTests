@@ -17,6 +17,7 @@ C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\MicrosoftWebDrive
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\PlmonFuncTestNunit.dll.config
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\PlmonFuncTestNunit.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\PlmonFuncTestNunit.pdb
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Dapper.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Edge.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Excel.Helper.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\ExcelDataReader.DataSet.dll
@@ -29,6 +30,7 @@ C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\RestSharp.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\System.Linq.Dynamic.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\WebDriver.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\WebDriver.Support.dll
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Dapper.xml
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Edge.xml
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Excel.Helper.xml
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\ExcelDataReader.xml
@@ -44,6 +46,3 @@ C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNuni
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csproj.GenerateResource.Cache
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.pdb
-C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csprojResolveAssemblyReference.cache
-C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Dapper.dll
-C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Dapper.xml

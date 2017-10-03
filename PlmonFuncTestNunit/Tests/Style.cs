@@ -76,7 +76,7 @@ namespace PlmonFuncTestNunit.Tests
         {
             get
             {
-                List<TestCaseData> testCaseDataList = new ExelUnit().ReadExcelData(@"C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\TestsInputData\TestData.xlsx");
+                List<TestCaseData> testCaseDataList = new ExelUnit().ReadExcelData(@"C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\TestsInputData\TestData.xlsx","Login");
                 if (testCaseDataList != null)
                     foreach (TestCaseData testCaseData in testCaseDataList)
                         yield return testCaseData;
