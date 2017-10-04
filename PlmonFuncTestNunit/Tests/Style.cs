@@ -54,12 +54,12 @@ namespace PlmonFuncTestNunit.Tests
         }
 
         [Test, Category("Function tests Style")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserStyle")]
+        [TestCaseSource("StyleData")]
         public void CheckCreateStyle(String browserName, String user)
         {
             //Init Driver go to URL
             SetUp(browserName,user);
-
+            SeleniumGetMethod.WaitForPageLoad(driver);
             // Go To Style Folder
             var pageStyle = _pages.GetPage<PageObjectStyle>();
             _reportingTasks.Log(Status.Info, "UserAuto go to Style Folder " +"<br>"+driver.Url+"</br>");

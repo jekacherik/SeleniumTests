@@ -9,6 +9,7 @@ using PlmonFuncTestNunit.Base_Classes;
 using OpenQA.Selenium.Support.Extensions;
 using PlmonFuncTestNunit.PageObjects;
 using PlmonFuncTestNunit.TestsInputData;
+using OpenQA.Selenium.IE;
 
 namespace PlmonFuncTestNunit
 {
@@ -76,9 +77,11 @@ namespace PlmonFuncTestNunit
         {
             //Go to Desk Page
             Goto(_config.PlmUrl);
+            SeleniumGetMethod.WaitForPageLoad(driver);
             //If User not login 
             if (driver.Url.IndexOf("/BI/BI_Main.aspx", StringComparison.OrdinalIgnoreCase) == -1)
             {
+                SeleniumGetMethod.WaitForPageLoad(driver);
                 //Go to Login page
                 driver.Navigate().GoToUrl(_config.PlmUrlDef);
                 var pagelogin = _pages.GetPage<LoginPageObjects>();
@@ -87,17 +90,22 @@ namespace PlmonFuncTestNunit
                 pagelogin.Login(user, _config.Password);
 
                 _reportingTasks.Log(Status.Info, user + " Login in the system");
-
+                SeleniumGetMethod.WaitForPageLoad(driver);
             }
             else
             {
-                driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
+                //if (InternetExplorerDriver )
+                //{
+                //    driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
+                //}
+
             }
         }
 
         public static void Goto(string url)
         {
-            driver.Url = url;
+            driver.Navigate().GoToUrl(url);
+            //driver.Url = url;
         }
         public static string Title
         {
@@ -112,6 +120,7 @@ namespace PlmonFuncTestNunit
         {
             _reportingTasks.FinalizeTest(driver);
             driver.Quit();
+            driver.Dispose();
         }
 
         public static IEnumerable<String> BrowserToRunWith()

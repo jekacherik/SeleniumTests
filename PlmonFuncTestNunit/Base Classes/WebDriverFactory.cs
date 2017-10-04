@@ -20,15 +20,20 @@ namespace PlmonFuncTestNunit.Base_Classes
             {
                 case "ie":
                     InternetExplorerOptions ieoptions = new InternetExplorerOptions();
-                    ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = false;
+                    //ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+                    ////ieoptions.EnsureCleanSession = true;
                     ieoptions.EnableNativeEvents = true;
-                    ieoptions.IgnoreZoomLevel = true;
-                    ieoptions.BrowserCommandLineArguments = "-nomerge";
+                    ////ieoptions.IgnoreZoomLevel = true;
+                    ////ieoptions.RequireWindowFocus = true;
+                    //ieoptions.PageLoadStrategy = InternetExplorerPageLoadStrategy.Normal;
+                    //ieoptions.BrowserCommandLineArguments = "-nomerge";
                     driver = new InternetExplorerDriver(ieoptions);
                     driver.Manage().Window.Maximize();
                     break;
                 case "Edge":
-                    driver = new EdgeDriver();
+                    EdgeOptions options = new EdgeOptions();
+                    options.PageLoadStrategy = EdgePageLoadStrategy.Normal;
+                    driver = new EdgeDriver(options);
                     driver.Manage().Window.Size = new Size(1920, 1080);
                     break;
                     //case "Firefox":

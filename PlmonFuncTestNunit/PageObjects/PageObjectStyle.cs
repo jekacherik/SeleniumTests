@@ -40,7 +40,8 @@ namespace PlmonFuncTestNunit.PageObjects
         public void OpenStyle()
         {
             btnStyleDesk.Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementExists((By.Id("lblHeader"))));
+            SeleniumGetMethod.WaitForPageLoad(driver);
+            new WebDriverWait(driver, TimeSpan.FromSeconds(6000)).Until(ExpectedConditions.ElementExists((By.Id("lblHeader"))));
             Assert.AreEqual("Style Folder", lblHeader.Text, "Text not found!!!");
         }
 
