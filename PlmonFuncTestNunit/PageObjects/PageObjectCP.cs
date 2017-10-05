@@ -45,6 +45,37 @@ namespace PlmonFuncTestNunit.PageObjects
 
 
 
+        //try check scroll and image upload
+
+        [FindsBy(How = How.CssSelector, Using = "span.rtPlus")]
+        public IList<IWebElement> CpArray { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='LeftMenu_ControlLeftMenuYSTreeView1']/ul/li/ul/li[16]/div/span[2]")]
+        public IWebElement CalendarArrow { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(8) > div > span.rtPlus")]
+        public IWebElement GvtArrow { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='LeftMenu_ControlLeftMenuYSTreeView1']/ul/li/ul/li[8]/ul/li[2]/div/a")]
+        public IWebElement GenRepLogo { get; set; }
+
+        [FindsBy(How = How.Id, Using = "btnAdd")]
+        public IWebElement BtnAttachImg { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='LeftMenu_ControlLeftMenuYSTreeView1']/ul/li/ul/li[16]/ul/li[1]/div/a")]
+        public IWebElement ActiveAcions { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='DataGrid1']/tbody/tr[51]/td[3]/table/tbody/tr/td/span/label")]
+        public IWebElement ActActionsCheckBox { get; set; }
+
+        [FindsBy(How = How.Id, Using = "btnSave")]
+        public IWebElement BtnSaveAct { get; set; }
+
+        [FindsBy(How = How.Id, Using = "imgBtnSearch")]
+        public IWebElement BtnSearchACt { get; set; }
+
+
+
         public void OpenCP()
         {
             new WebDriverWait(driver, TimeSpan.FromSeconds(100)).Until(ExpectedConditions.ElementExists((By.Id("DeskTop_DataList1_ctl12_imgBtn"))));

@@ -79,6 +79,7 @@
     <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,7 +101,9 @@
     <Compile Include="Base Classes\ReportingTasks.cs" />
     <Compile Include="Base Classes\TestsConfiguration.cs" />
     <Compile Include="Base Classes\WebDriverFactory.cs" />
+    <Compile Include="Helpers\FileUploader.cs" />
     <Compile Include="Helpers\Randomizer.cs" />
+    <Compile Include="Helpers\WindowsMessages.cs" />
     <Compile Include="PageObjects\PageBase.cs" />
     <Compile Include="PageObjects\PageObjectCP.cs" />
     <Compile Include="PageObjects\PageObjectStyle.cs" />

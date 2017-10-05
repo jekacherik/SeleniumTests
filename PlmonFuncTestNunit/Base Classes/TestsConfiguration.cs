@@ -14,6 +14,11 @@ namespace PlmonFuncTestNunit.Base_Classes
 
         public string PlmUrl { get; private set; }
         public string PlmUrlDef { get; private set; }
+        //path for image to uload
+        public string FileUploadPath { get; set; }
+        public string FileUploadPathSeveral { get; set; }
+
+
         public string Login { get; private set; }
         public string Password { get; private set; }
         public TimeSpan ImplicitlyWait { get; private set; }
@@ -36,6 +41,10 @@ namespace PlmonFuncTestNunit.Base_Classes
             var testsConfig = new TestsConfiguration();
 
             testsConfig.PlmUrl = GetSettingsString("urlPlmon");
+            //path for image to uload
+            testsConfig.FileUploadPath = GetSettingsString("fileUploadPath");
+            testsConfig.FileUploadPathSeveral = GetSettingsString("fileUploadPathSeveral");
+
             testsConfig.PlmUrlDef = GetSettingsString("urlPlmonDef");
             testsConfig.Login = GetSettingsString("login");
             testsConfig.Password = GetSettingsString("password");
