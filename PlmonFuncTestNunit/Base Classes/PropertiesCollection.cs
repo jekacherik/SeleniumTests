@@ -10,6 +10,8 @@ using OpenQA.Selenium.Support.Extensions;
 using PlmonFuncTestNunit.PageObjects;
 using PlmonFuncTestNunit.TestsInputData;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Support.Events;
+using System.Drawing.Imaging;
 
 namespace PlmonFuncTestNunit
 {
@@ -59,6 +61,12 @@ namespace PlmonFuncTestNunit
 
             //Init Web driver  
             driver = WebDriverFactory.GetWebDriver(browserName);
+            EventFiringWebDriver firingDriver = new EventFiringWebDriver(driver);
+            firingDriver.ExceptionThrown += firingDriver_TakeScreenshotOnException;
+            //firingDriver.ElementClicked += firingDriver_Cliked;
+            firingDriver.Navigated += firingDriver_Navigate;
+            driver = firingDriver;
+
             driver.Manage().Timeouts().ImplicitWait = _config.ImplicitlyWait;
             driver.Manage().Timeouts().PageLoad = _config.PageLoadWait;
             //init Page Manager 
@@ -76,6 +84,7 @@ namespace PlmonFuncTestNunit
         public void IsLogin(String user)
         {
             //Go to Desk Page
+            _reportingTasks.CreateNode("User Authorization action");
             Goto(_config.PlmUrl);
             SeleniumGetMethod.WaitForPageLoad(driver);
             //If User not login 
@@ -115,6 +124,28 @@ namespace PlmonFuncTestNunit
         {
             get { return driver; }
         }
+        private static void firingDriver_TakeScreenshotOnException(object sender, WebDriverExceptionEventArgs e)
+        {
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd-hhmm-ss");
+            driver.TakeScreenshot().SaveAsFile("Exception-" + timestamp + ".png");
+            _reportingTasks.Log(Status.Warning, "Exception"+ sender);
+        }
+
+        private static void firingDriver_Cliked(object sender, WebElementEventArgs e)
+        {
+            
+            _reportingTasks.Log(Status.Skip, "User ClickedElements ");
+        }
+        private static void firingDriver_Navigate(object sender, WebDriverNavigationEventArgs e)
+        {
+            _reportingTasks.Log(Status.Info, "Navigate to URL "+ driver.Url);
+
+            if(driver.Url.IndexOf("/CustomError.aspx", StringComparison.OrdinalIgnoreCase) != -1)
+            {
+                _reportingTasks.Log(Status.Error, "Found OOPs page!!!");
+            }
+        }
+
         [TearDown]
         public void Cleanup()
         {

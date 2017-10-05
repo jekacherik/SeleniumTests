@@ -27,6 +27,7 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.CssSelector, Using = "#btnRemove > div > span")]
         public IWebElement btnRemove { get; set; }
 
+
         [FindsBy(How = How.Id, Using = "btnAddRow")]
         public IWebElement btnAddRow { get; set; }
 

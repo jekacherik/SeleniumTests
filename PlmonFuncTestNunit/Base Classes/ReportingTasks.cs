@@ -34,13 +34,18 @@ namespace PlmonFuncTestNunit.Base_Classes
         {
             _test = _extent
                 .CreateTest("<h5>"+TestContext.CurrentContext.Test.ClassName +"</h5><br>"+ TestContext.CurrentContext.Test.Name)
-                .AssignCategory(TestContext.CurrentContext.Test.ClassName)
+                .AssignCategory("<font color='green'>" + TestContext.CurrentContext.Test.ClassName+"</font>")
+                .CreateNode("Tests Actions")
                 .AssignAuthor("Evgenia") ;
         }
         public void Log(Status status,String description)
         {
             _test.Log(status, description);
 
+        }
+        public void CreateNode(String name)
+        {
+            _test.CreateNode(name);
         }
         /// <summary>
         /// Finalizes the test.

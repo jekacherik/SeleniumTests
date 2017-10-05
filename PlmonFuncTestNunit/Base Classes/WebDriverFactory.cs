@@ -2,9 +2,11 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Support.Events;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace PlmonFuncTestNunit.Base_Classes
                     ////ieoptions.EnsureCleanSession = true;
                     ieoptions.EnableNativeEvents = true;
                     ////ieoptions.IgnoreZoomLevel = true;
-                    ////ieoptions.RequireWindowFocus = true;
+                    ieoptions.RequireWindowFocus = true;
                     //ieoptions.PageLoadStrategy = InternetExplorerPageLoadStrategy.Normal;
                     //ieoptions.BrowserCommandLineArguments = "-nomerge";
                     driver = new InternetExplorerDriver(ieoptions);
@@ -44,10 +46,13 @@ namespace PlmonFuncTestNunit.Base_Classes
                     driver = new ChromeDriver();
                     //driver.Manage().Window.Size = new Size(1024, 768);
                     driver.Manage().Window.Maximize();
+
                     break;
             
             }
             return driver;
         }
+
+
     }
 }

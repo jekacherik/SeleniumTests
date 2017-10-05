@@ -28,6 +28,8 @@ namespace PlmonFuncTestNunit.Tests
             deskPage.OpenCP();
             System.Threading.Thread.Sleep(3000);
             Assert.AreEqual("Control Panel", deskPage.labelTitle(), "Element found");
+
+
             //_test.Log(Status.Info, "Open Control Panel link");
             //_extent.Flush();
 

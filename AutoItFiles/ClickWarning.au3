@@ -1,0 +1,6 @@
+WinWait("Âûבמנ גûךכאהûגאולמדמ פאיכא","",10)
+ControlFocus("Âûבמנ גûךכאהûגאולמדמ פאיכא", "", "Edit1")
+ControlSetText("Âûבמנ גûךכאהûגאולמדמ פאיכא", "", "Edit1", "SomeFile.txt")
+Sleep(2000)
+Send("{ENTER}")
+Sleep(2000)
