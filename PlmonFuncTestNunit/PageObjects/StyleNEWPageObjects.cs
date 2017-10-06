@@ -54,8 +54,9 @@ namespace PlmonFuncTestNunit.PageObjects
             bool isValidatorDisplayed = error_icon.Displayed;
             Assert.AreEqual(true, isValidatorDisplayed, "Validator wasn't find");
             //Click btn Close
-            btnClose.Click();
+            SeleniumGetMethod.WaitForPageLoad(driver);
             PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto click button Close");
+            btnClose.Click();
         }
     }
 

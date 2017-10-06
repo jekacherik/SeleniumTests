@@ -50,3 +50,47 @@ C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNuni
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csproj.GenerateResource.Cache
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.pdb
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\ExtentReports.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\NUnit3.TestAdapter.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\nunit.engine.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\nunit.engine.api.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Mono.Cecil.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Mono.Cecil.Pdb.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Mono.Cecil.Mdb.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Mono.Cecil.Rocks.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\MicrosoftWebDriver.exe
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\AutoItX3.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\AutoItX3_x64.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\PlmonFuncTestNunit.dll.config
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\PlmonFuncTestNunit.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\PlmonFuncTestNunit.pdb
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\AutoItX3.Assembly.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Dapper.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Edge.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Excel.Helper.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\ExcelDataReader.DataSet.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\ExcelDataReader.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Newtonsoft.Json.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\nunit.framework.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Oinq.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\RestSharp.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\System.Linq.Dynamic.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\WebDriver.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\WebDriver.Support.dll
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\AutoItX3.Assembly.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Dapper.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Edge.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Excel.Helper.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\ExcelDataReader.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\ExcelDataReader.DataSet.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Newtonsoft.Json.pdb
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Newtonsoft.Json.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\nunit.framework.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\Oinq.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\RestSharp.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\WebDriver.xml
+C:\SeleniumTests\PlmonFuncTestNunit\bin\Debug\WebDriver.Support.xml
+C:\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.TestsInputData.AutomationSettings.resources
+C:\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csproj.GenerateResource.Cache
+C:\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.dll
+C:\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.pdb

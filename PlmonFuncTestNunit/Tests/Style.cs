@@ -21,7 +21,7 @@ namespace PlmonFuncTestNunit.Tests
 
         //public string existingWindowHandle { get; private set; }
 
-        [Test, Category("Function tests Style")]
+        [Test, Category("Function tests Style"),Description("Open Style Tests")]
         [TestCaseSource("StyleData")]
         public void CheckOpenStyle(string browserName, string user)
         {

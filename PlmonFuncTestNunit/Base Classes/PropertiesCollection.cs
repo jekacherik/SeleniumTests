@@ -62,9 +62,9 @@ namespace PlmonFuncTestNunit
             //Init Web driver  
             driver = WebDriverFactory.GetWebDriver(browserName);
             EventFiringWebDriver firingDriver = new EventFiringWebDriver(driver);
-            firingDriver.ExceptionThrown += firingDriver_TakeScreenshotOnException;
-            //firingDriver.ElementClicked += firingDriver_Cliked;
-            firingDriver.Navigated += firingDriver_Navigate;
+            firingDriver.ExceptionThrown += FiringDriver_TakeScreenshotOnException;
+            firingDriver.ElementClicked += FiringDriver_Cliked;
+            firingDriver.Navigated += FiringDriver_Navigate;
             driver = firingDriver;
 
             driver.Manage().Timeouts().ImplicitWait = _config.ImplicitlyWait;
@@ -124,21 +124,33 @@ namespace PlmonFuncTestNunit
         {
             get { return driver; }
         }
-        private static void firingDriver_TakeScreenshotOnException(object sender, WebDriverExceptionEventArgs e)
+        private static void FiringDriver_TakeScreenshotOnException(object sender, WebDriverExceptionEventArgs e)
         {
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd-hhmm-ss");
-            driver.TakeScreenshot().SaveAsFile("Exception-" + timestamp + ".png");
-            _reportingTasks.Log(Status.Warning, "Exception"+ sender);
+            _reportingTasks.LogAddScrren(driver, "Event exception" + timestamp);
         }
 
-        private static void firingDriver_Cliked(object sender, WebElementEventArgs e)
+        private static void FiringDriver_Cliked(object sender, WebElementEventArgs e)
         {
-            
-            _reportingTasks.Log(Status.Skip, "User ClickedElements ");
+
+            try
+            {
+                var elem = e.Element.GetAttribute("Id");
+                _reportingTasks.Log(Status.Pass, "User click " + elem);
+            }
+            catch (StaleElementReferenceException ex)
+            {
+
+            }
+            catch (NoSuchWindowException ew)
+            {
+
+            }
+
         }
-        private static void firingDriver_Navigate(object sender, WebDriverNavigationEventArgs e)
+        private static void FiringDriver_Navigate(object sender, WebDriverNavigationEventArgs e)
         {
-            _reportingTasks.Log(Status.Info, "Navigate to URL "+ driver.Url);
+            _reportingTasks.Log(Status.Info, "Navigate to URL "+ e.Driver.Url);
 
             if(driver.Url.IndexOf("/CustomError.aspx", StringComparison.OrdinalIgnoreCase) != -1)
             {

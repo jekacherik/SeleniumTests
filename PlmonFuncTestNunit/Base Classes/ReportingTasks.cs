@@ -33,9 +33,9 @@ namespace PlmonFuncTestNunit.Base_Classes
         public void InitializeTest()
         {
             _test = _extent
-                .CreateTest("<h5>"+TestContext.CurrentContext.Test.ClassName +"</h5><br>"+ TestContext.CurrentContext.Test.Name)
-                .AssignCategory("<font color='green'>" + TestContext.CurrentContext.Test.ClassName+"</font>")
-                .CreateNode("Tests Actions")
+                .CreateTest("<h5>" + TestContext.CurrentContext.Test.ClassName + "</h5><br>" + TestContext.CurrentContext.Test.Name)
+                .AssignCategory("<font color='green'>" + TestContext.CurrentContext.Test.ClassName + "</font>")
+                .CreateNode("Test actions")
                 .AssignAuthor("Evgenia") ;
         }
         public void Log(Status status,String description)
@@ -46,6 +46,12 @@ namespace PlmonFuncTestNunit.Base_Classes
         public void CreateNode(String name)
         {
             _test.CreateNode(name);
+        }
+        public void LogAddScrren(IWebDriver driver,String name)
+        {
+            string screenShotPath1;
+            screenShotPath1 = Capture(driver, "errorScreen");
+            _test.Log(Status.Error, name + _test.AddScreenCaptureFromPath(screenShotPath1));
         }
         /// <summary>
         /// Finalizes the test.
