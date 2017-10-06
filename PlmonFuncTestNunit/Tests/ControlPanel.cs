@@ -58,7 +58,7 @@ namespace PlmonFuncTestNunit.Tests
         }
 
         [Test, Category("Function tests Style")]
-        [TestCaseSource("StyleData1")]
+        [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
         public void CheckSrol(string browserName, string user)
         {
             SetUp(browserName, user);
@@ -95,4 +95,5 @@ namespace PlmonFuncTestNunit.Tests
         }
 
     }
+
 }

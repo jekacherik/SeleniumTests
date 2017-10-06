@@ -11,6 +11,7 @@ using OpenQA.Selenium.IE;
 using AventStack.ExtentReports;
 using System.IO;
 using OpenQA.Selenium.Support.UI;
+using NUnit.Framework;
 
 namespace PlmonFuncTestNunit.Helpers
 {
@@ -18,10 +19,14 @@ namespace PlmonFuncTestNunit.Helpers
     {
         public static void UploadFile(IWebElement webElement, IWebElement saveButton, string filePath)
         {
+            string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+            string actualPath = pth.Substring(0, pth.IndexOf("bin"));
+            string projectPth = new Uri(actualPath).LocalPath;
 
-            if (!File.Exists(filePath))
+            if (!File.Exists(projectPth+filePath))
             {
-                PropertiesCollection._reportingTasks.Log(Status.Info, "file not exists");
+                PropertiesCollection._reportingTasks.Log(Status.Info, "file not exists"+ projectPth + filePath);
+                
                 return;
             }
             else
@@ -34,7 +39,7 @@ namespace PlmonFuncTestNunit.Helpers
                 {
                     webElement.Click();
                     System.Threading.Thread.Sleep(3000);
-                    SendKeys.SendWait(filePath);
+                    SendKeys.SendWait(projectPth + filePath);
                     System.Threading.Thread.Sleep(3000);
                     SendKeys.SendWait(@"{Enter}");
                     System.Threading.Thread.Sleep(5000);
