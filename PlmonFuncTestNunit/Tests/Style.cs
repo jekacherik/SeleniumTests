@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using PlmonFuncTestNunit.TestsInputData;
 using System.Collections.Generic;
 using PlmonFuncTestNunit.Base_Classes;
+using PlmonFuncTestNunit.DB_connectors;
 
 namespace PlmonFuncTestNunit.Tests
 {
@@ -20,6 +21,7 @@ namespace PlmonFuncTestNunit.Tests
         //private string title;
 
         //public string existingWindowHandle { get; private set; }
+        List<string> dataItems = new List<string>();
 
         [Test, Category("Function tests Style"),Description("Open Style Tests")]
         [TestCaseSource("StyleData")]
@@ -59,6 +61,14 @@ namespace PlmonFuncTestNunit.Tests
         {
             //Init Driver go to URL
             SetUp(browserName,user);
+
+            PostGreSQL pgTest = new PostGreSQL();
+
+
+            pgTest.PostgreTestInsert();
+
+            dataItems = pgTest.PostgreSQLtest1();
+
             SeleniumGetMethod.WaitForPageLoad(driver);
             // Go To Style Folder
             var pageStyle = _pages.GetPage<PageObjectStyle>();

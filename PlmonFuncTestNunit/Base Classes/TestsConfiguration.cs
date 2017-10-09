@@ -24,6 +24,7 @@ namespace PlmonFuncTestNunit.Base_Classes
         public TimeSpan ImplicitlyWait { get; private set; }
         public TimeSpan PageLoadWait { get; private set; }
         public string TestDataSheetPath { get; private set; }
+        public string Connstring { get; private set; }
 
         private static string GetSettingsString(string propName)
         {
@@ -51,6 +52,7 @@ namespace PlmonFuncTestNunit.Base_Classes
             testsConfig.TestDataSheetPath = GetSettingsString("TestDataSheetPath");
             testsConfig.ImplicitlyWait = TimeSpan.FromSeconds(Convert.ToInt32(GetSettingsString("implicitlyWaitSeconds")));
             testsConfig.PageLoadWait = TimeSpan.FromSeconds(Convert.ToInt32(GetSettingsString("pageLoadWaitSeconds")));
+            testsConfig.Connstring = GetSettingsString("connstring");
 
 
 

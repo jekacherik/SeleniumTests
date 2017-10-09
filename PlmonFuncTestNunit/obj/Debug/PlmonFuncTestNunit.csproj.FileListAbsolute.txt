@@ -94,3 +94,8 @@ C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNuni
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csproj.GenerateResource.Cache
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.dll
 C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.pdb
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Npgsql.dll
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\Npgsql.xml
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csprojResolveAssemblyReference.cache
