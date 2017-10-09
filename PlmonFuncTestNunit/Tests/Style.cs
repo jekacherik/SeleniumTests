@@ -62,11 +62,10 @@ namespace PlmonFuncTestNunit.Tests
             //Init Driver go to URL
             SetUp(browserName,user);
 
+            //Insert Data for Login Table in DB
             PostGreSQL pgTest = new PostGreSQL();
-
-
             pgTest.PostgreTestInsert();
-
+            //Select from Login Table in DB
             dataItems = pgTest.PostgreSQLtest1();
 
             SeleniumGetMethod.WaitForPageLoad(driver);

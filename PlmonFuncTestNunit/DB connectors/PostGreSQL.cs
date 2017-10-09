@@ -15,15 +15,11 @@ namespace PlmonFuncTestNunit.DB_connectors
     {
         List<string> dataItems = new List<string>();
         protected TestsConfiguration _conf = null;
-        protected PostGreSQL _pG;
+
 
         public void PostgreSQL()
         {
             
-        }
-        public void InitConf()
-        {
-            _conf = TestsConfiguration.Instance;
         }
 
         public List<string> PostgreSQLtest1()
@@ -55,11 +51,15 @@ namespace PlmonFuncTestNunit.DB_connectors
         public void PostgreTestInsert()
         {
             _conf = TestsConfiguration.Instance;
+            string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+            string actualPath = pth.Substring(0, pth.IndexOf("bin"));
+            string projectPth = new Uri(actualPath).LocalPath;
+
             try
             {
                 string connstring = _conf.Connstring;
                 NpgsqlConnection connection = new NpgsqlConnection(connstring);
-                FileInfo file = new FileInfo(@"C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\DB connectors\InsertLoginTable.sql");
+                FileInfo file = new FileInfo(projectPth+@"DB connectors\InsertLoginTable.sql");
                 string script = file.OpenText().ReadToEnd();
                 connection.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand(script, connection);
