@@ -83,7 +83,7 @@ namespace PlmonFuncTestNunit.Base_Classes
                     logstatus = Status.Pass;
                     break;
             }
-            _test.Log(logstatus, "Test ended with " + logstatus + stacktrace);
+            _test.Log(logstatus, "Test ended with "+ logstatus+ "<b>" +errorMassege+"</b><br>"+ stacktrace);
             _extent.Flush();
         }
 

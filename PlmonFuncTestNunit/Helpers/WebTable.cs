@@ -1,4 +1,5 @@
 ﻿using AventStack.ExtentReports;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -82,15 +83,17 @@ namespace PlmonFuncTestNunit.Helpers
                 });
 
             }
-
+            int j = 0;
             for (var i = 0; i < _linksTableHeaderCollection.Count; i++)
             {
                 var text =_linksTableHeaderCollection[i].LinkText.ToString();
-                var linkf = driver.FindElement(By.PartialLinkText(text));
+                var linkf = driver.FindElement(By.LinkText(text));
                 linkf.Click();
+                j++;
                 //PropertiesCollection._reportingTasks.Log(Status.Info, text);
                 SeleniumGetMethod.WaitForPageLoad(driver);
             }
+            Assert.AreEqual(j, _linksTableHeaderCollection.Count, "Count of links are DIFFERENT!!!");
         }
     }
 
