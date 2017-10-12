@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using PlmonFuncTestNunit.Base_Classes;
 using PlmonFuncTestNunit.DB_connectors;
 using PlmonFuncTestNunit.Helpers;
+using System.IO;
 
 namespace PlmonFuncTestNunit.Tests
 {
@@ -37,6 +38,9 @@ namespace PlmonFuncTestNunit.Tests
             _reportingTasks.Log(Status.Info, "UserAuto go to Style Folder " + driver.Url);
             pageStyle.OpenStyle();
 
+            FileUploader.DownLoadFile(pageStyle.ExcelExport, pageStyle.ExcelExportCloseWait);
+
+            /*
             //Click Row in Header 
             pageStyle.rowHeader.Click();
             new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementExists((By.Id("btnSearch"))));
@@ -58,7 +62,7 @@ namespace PlmonFuncTestNunit.Tests
             var count = WebTable.TableCountColumns(pageStyle.table).ToString();
             _reportingTasks.Log(Status.Info, count);
 
-            WebTable.ClickLinks(driver, pageStyle.table);
+            WebTable.ClickLinks(driver, pageStyle.table);*/
         }
 
         [Test, Category("Function tests Style")]
@@ -91,7 +95,11 @@ namespace PlmonFuncTestNunit.Tests
         {
             get
             {
-                List<TestCaseData> testCaseDataList = new ExelUnit().ReadExcelData(@"C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\TestsInputData\TestData.xlsx","Login");
+                string pathGl = Path.GetDirectoryName(System.Reflection.Assembly.GetCallingAssembly().CodeBase);
+                string path = pathGl.Substring(0, pathGl.IndexOf("bin")) + ("TestsInputData\\TestData.xlsx");
+                string projectPth = new Uri(path).LocalPath;
+
+                List<TestCaseData> testCaseDataList = new ExelUnit().ReadExcelData(projectPth, "Login");
                 if (testCaseDataList != null)
                     foreach (TestCaseData testCaseData in testCaseDataList)
                         yield return testCaseData;

@@ -30,6 +30,29 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "btnNew")]
         public IWebElement btnNew { get; set; }
 
+        [FindsBy(How = How.Id, Using = "btnExcelExport")]
+        public IWebElement ExcelExport { get; set; }
+
+        //try obtain calendar
+        [FindsBy(How = How.XPath, Using = " //*[@id='header - search']/div/div")]
+        public IWebElement SearchExpand { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[contains(@class, 'calendar')]")]
+        public IWebElement CalendarIconFirst { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//*[contains(@src, 'icon_calendar')])[2]")]
+        public IWebElement CalendarIconSecond { get; set; }
+
+        //[FindsBy(How = How.XPath, Using = "//*[@id='thedate']//td[@class='fontHead']/a")]
+        //[FindsBy(How = How.XPath, Using = "//*[contains(@class, 'k-today')]/a")]
+        [FindsBy(How = How.CssSelector, Using = "div[data-role=calendar] td[class~=k-today] a")]
+        public IWebElement CurrentDate { get; set; }
+
+
+
+        [FindsBy(How = How.Id, Using = "close_link")]
+        public IWebElement ExcelExportCloseWait { get; set; }
+
         [FindsBy(How = How.Id, Using = "ctrGrid_RadGridStyles_ctl00")]
         public IWebElement table { get; set; }
 

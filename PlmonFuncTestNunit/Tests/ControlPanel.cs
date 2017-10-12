@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PlmonFuncTestNunit.Helpers;
+using System.IO;
+using OpenQA.Selenium;
 
 namespace PlmonFuncTestNunit.Tests
 {
@@ -58,42 +60,208 @@ namespace PlmonFuncTestNunit.Tests
         }
 
         [Test, Category("Function tests Style")]
-        [TestCaseSource(typeof(PropertiesCollection), "BrowserUserControlPanel")]
+        [TestCaseSource("StyleData1")]
         public void CheckSrol(string browserName, string user)
         {
             SetUp(browserName, user);
             //Open CP in menu
             var deskPage = _pages.GetPage<PageObjectCP>();
-
             deskPage.OpenCP();
             System.Threading.Thread.Sleep(10000);
-            // deskPage.BtnSearchACt.Click();
-            // Assert.AreEqual("Control Panel", deskPage.labelTitle(), "Element found");
 
-            //deskPage.CalendarArrow.Click();
-            //deskPage.GvtArrow.Click();
-            //deskPage.CpArray[7].Click();
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsWorkflows);
 
+            for (int i = 0; i < deskPage.CpWorkflowsItems.Count; i++)
+            {
+                deskPage.CpWorkflowsItems[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsTemplates);
+
+            for (int i = 0; i < deskPage.CpTemplatesItems.Count; i++)
+            {
+                deskPage.CpTemplatesItems[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsMeasurements);
+
+            for (int i = 0; i < deskPage.CpMeasurementItems.Count; i++)
+            {
+                deskPage.CpMeasurementItems[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsMatSubTypes);
+
+            for (int i = 0; i < deskPage.CpMatSubTypItems.Count; i++)
+            {
+                deskPage.CpMatSubTypItems[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsMatValTables);
+
+            for (int i = 0; i < deskPage.CpMatValTables.Count; i++)
+            {
+                deskPage.CpMatValTables[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsImgValTables);
+
+            for (int i = 0; i < deskPage.CpImgValTables.Count; i++)
+            {
+                deskPage.CpImgValTables[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsColorValidTables);
+
+            for (int i = 0; i < deskPage.CpColorValTables.Count; i++)
+            {
+                deskPage.CpColorValTables[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsGenValTables);
+
+            for (int i = 0; i < deskPage.CpGenValTables.Count; i++)
+            {
+                deskPage.CpGenValTables[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsCare);
+
+            for (int i = 0; i < deskPage.CpCare.Count; i++)
+            {
+                deskPage.CpCare[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsBoL);
+
+            for (int i = 0; i < deskPage.CpBillofLabor.Count; i++)
+            {
+                deskPage.CpBillofLabor[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsLineList);
+
+            for (int i = 0; i < deskPage.CpLineList.Count; i++)
+            {
+                deskPage.CpLineList[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsFlashCosting);
+
+            for (int i = 0; i < deskPage.CpFlashCosting.Count; i++)
+            {
+                deskPage.CpFlashCosting[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsSourcingFolder);
+
+            for (int i = 0; i < deskPage.CpSourcing.Count; i++)
+            {
+                deskPage.CpSourcing[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsPartnerFolder);
+
+            for (int i = 0; i < deskPage.CpPartner.Count; i++)
+            {
+                deskPage.CpPartner[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsPlanningFolder);
+
+            for (int i = 0; i < deskPage.CpPlanning.Count; i++)
+            {
+                deskPage.CpPlanning[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsCalendar);
+
+            for (int i = 0; i < deskPage.CpCalendar.Count; i++)
+            {
+                deskPage.CpCalendar[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsTechPacks);
+
+            for (int i = 0; i < deskPage.CpTechPacks.Count; i++)
+            {
+                deskPage.CpTechPacks[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsAiPlugin);
+
+            for (int i = 0; i < deskPage.CpPlugin.Count; i++)
+            {
+                deskPage.CpPlugin[i].Click();
+                System.Threading.Thread.Sleep(3000);
+            }
+            executor.ExecuteScript(Scripts.ScriptsJS.cpMinus);
+            System.Threading.Thread.Sleep(2000);
+            executor.ExecuteScript(Scripts.ScriptsJS.cparrowsWorkflows);
+
+            //---------file uploader test
             deskPage.GenRepLogo.Click();
             System.Threading.Thread.Sleep(3000);
             FileUploader.UploadFile(deskPage.BtnAttachImg, deskPage.BtnSaveAct, _config.FileUploadPath);
-
             System.Threading.Thread.Sleep(3000);
-            // deskPage.BtnSaveAct.Click();
-            //deskPage.BtnSaveAct.Click();
-            //deskPage.ActiveAcions.Click();
-            //System.Threading.Thread.Sleep(3000);
-            //deskPage.ActActionsCheckBox.Click();
-            //System.Threading.Thread.Sleep(3000);
-            //deskPage.BtnSaveAct.Click();
-            //System.Threading.Thread.Sleep(3000);
-            //deskPage.ActActionsCheckBox.Click();
-            //deskPage.BtnSaveAct.Click();
-            // deskPage.BtnSaveAct.Click();
-            //_test.Log(Status.Info, "Open Control Panel link");
+
+
             //_extent.Flush();
         }
 
+        public static IEnumerable<TestCaseData> StyleData1
+        {
+
+            get
+            {
+                string pathGl = Path.GetDirectoryName(System.Reflection.Assembly.GetCallingAssembly().CodeBase);
+                string path = pathGl.Substring(0, pathGl.IndexOf("bin")) + ("TestsInputData\\TestData.xlsx");
+                string projectPth = new Uri(path).LocalPath;
+
+                List<TestCaseData> testCaseDataList = new ExelUnit().ReadExcelData(projectPth, "Login");
+                if (testCaseDataList != null)
+                    foreach (TestCaseData testCaseData in testCaseDataList)
+                        yield return testCaseData;
+            }
+        }
+
     }
+
+    
 
 }

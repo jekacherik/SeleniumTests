@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,8 +45,15 @@ namespace PlmonFuncTestNunit.Base_Classes
                     //    break;
                 case "Chrome":
                 default:
-                    driver = new ChromeDriver();
-                    //driver.Manage().Window.Size = new Size(1024, 768);
+                    //for downloads
+                            string path1 = Path.GetDirectoryName(Assembly.GetCallingAssembly().CodeBase);
+                            string path2 = path1.Substring(0, path1.IndexOf("bin")) + ("Downloads\\");
+                            string path = new Uri(path2).LocalPath;
+                    var chromeOptions = new ChromeOptions();
+                    chromeOptions.AddUserProfilePreference("download.default_directory", path);
+                    chromeOptions.AddUserProfilePreference("intl.accept_languages", "nl");
+                    chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
+                    driver = new ChromeDriver(chromeOptions);
                     driver.Manage().Window.Maximize();
 
                     break;

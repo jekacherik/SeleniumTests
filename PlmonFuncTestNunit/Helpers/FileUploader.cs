@@ -12,6 +12,7 @@ using AventStack.ExtentReports;
 using System.IO;
 using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
+using System.Reflection;
 
 namespace PlmonFuncTestNunit.Helpers
 {
@@ -55,10 +56,20 @@ namespace PlmonFuncTestNunit.Helpers
         }
 
 
-        //need do DownLoad Image!!!!
-        public static void DownLoadFile(IWebElement webElement)
+        public static void DownLoadFile(IWebElement webElement, IWebElement webElement2)
         {
+            string path1 = Path.GetDirectoryName(Assembly.GetCallingAssembly().CodeBase);
+            string path2 = path1.Substring(0, path1.IndexOf("bin")) + ("Downloads\\");
+            string path = new Uri(path2).LocalPath;
+            string[] filePaths = Directory.GetFiles(path);
+            var quantityFilesBefore = filePaths.Count();
             webElement.Click();
+            new WebDriverWait(PropertiesCollection.driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementToBeClickable((By.Id(webElement2.GetAttribute("Id")))));
+            webElement2.Click();
+            new WebDriverWait(PropertiesCollection.driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementToBeClickable((By.Id(webElement.GetAttribute("Id")))));
+            var quantityFilesAfter = Directory.GetFiles(path).Count();
+            Assert.IsTrue(quantityFilesAfter > quantityFilesBefore, "Yes, downloading works");
+            PropertiesCollection._reportingTasks.Log(Status.Info, "Files founded BEFORE: " + quantityFilesBefore.ToString() + "<br>" + " Files founded AFTER : " + quantityFilesAfter.ToString());
         }
     }
 }
