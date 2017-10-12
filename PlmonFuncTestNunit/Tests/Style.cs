@@ -10,6 +10,7 @@ using PlmonFuncTestNunit.TestsInputData;
 using System.Collections.Generic;
 using PlmonFuncTestNunit.Base_Classes;
 using PlmonFuncTestNunit.DB_connectors;
+using PlmonFuncTestNunit.Helpers;
 
 namespace PlmonFuncTestNunit.Tests
 {
@@ -53,6 +54,11 @@ namespace PlmonFuncTestNunit.Tests
                 Assert.Fail("Found OOps!!!");
 
             }
+            SeleniumGetMethod.WaitForPageLoad(driver);
+            var count = WebTable.TableCountColumns(pageStyle.table).ToString();
+            _reportingTasks.Log(Status.Info, count);
+
+            WebTable.ClickLinks(driver, pageStyle.table);
         }
 
         [Test, Category("Function tests Style")]

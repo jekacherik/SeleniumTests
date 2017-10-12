@@ -64,6 +64,7 @@ namespace PlmonFuncTestNunit.DB_connectors
                 connection.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand(script, connection);
                 cmd.ExecuteNonQuery();
+                connection.Close();
             }
             catch (Exception msg1)
             {

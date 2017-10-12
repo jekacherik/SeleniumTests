@@ -30,6 +30,9 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "btnNew")]
         public IWebElement btnNew { get; set; }
 
+        [FindsBy(How = How.Id, Using = "ctrGrid_RadGridStyles_ctl00")]
+        public IWebElement table { get; set; }
+
         public StyleNEWPageObjects ClickNewStyle()
         {
             PopupWindowFinder wndFinder = new PopupWindowFinder(driver);
@@ -44,6 +47,8 @@ namespace PlmonFuncTestNunit.PageObjects
             new WebDriverWait(driver, TimeSpan.FromSeconds(6000)).Until(ExpectedConditions.ElementExists((By.Id("lblHeader"))));
             Assert.AreEqual("Style Folder", lblHeader.Text, "Text not found!!!");
         }
+
+
 
     }
 }

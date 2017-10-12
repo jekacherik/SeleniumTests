@@ -13,6 +13,9 @@ namespace PlmonFuncTestNunit
     public static class SeleniumGetMethod
     {
         private const int ShortTimeoutInSeconds = 1;
+        
+
+
         public static bool IsElementExists(this IWebDriver driver, IWebElement element)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(ShortTimeoutInSeconds);
@@ -94,11 +97,16 @@ namespace PlmonFuncTestNunit
         public static string GetTextFromDropDwn(this IWebElement element)
         {
 
-                return new SelectElement(element).AllSelectedOptions.SingleOrDefault().Text;
+            return new SelectElement(element).AllSelectedOptions.SingleOrDefault().Text;
 
 
         }
 
 
+
+
+
+
     }
+
 }

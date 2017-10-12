@@ -110,6 +110,7 @@
     <Compile Include="DB connectors\PostGreSQL.cs" />
     <Compile Include="Helpers\FileUploader.cs" />
     <Compile Include="Helpers\Randomizer.cs" />
+    <Compile Include="Helpers\WebTable.cs" />
     <Compile Include="Helpers\WindowsMessages.cs" />
     <Compile Include="PageObjects\PageBase.cs" />
     <Compile Include="PageObjects\PageObjectCP.cs" />
