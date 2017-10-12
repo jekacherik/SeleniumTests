@@ -39,7 +39,7 @@ namespace PlmonFuncTestNunit.Tests
             pageStyle.OpenStyle();
 
             FileUploader.DownLoadFile(pageStyle.ExcelExport, pageStyle.ExcelExportCloseWait);
-
+            WebTable.ClickLinks(driver, pageStyle.table);
             /*
             //Click Row in Header 
             pageStyle.rowHeader.Click();
