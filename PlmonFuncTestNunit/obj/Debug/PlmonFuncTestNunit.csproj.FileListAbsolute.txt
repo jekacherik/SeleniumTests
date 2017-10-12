@@ -251,3 +251,4 @@ C:\VS projects\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.Tes
 C:\VS projects\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.csproj.GenerateResource.Cache
 C:\VS projects\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.dll
 C:\VS projects\SeleniumTests\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.pdb
+C:\VS projects\PlmonFuncTestNunit\PlmonFuncTestNunit\obj\Debug\PlmonFuncTestNunit.Scripts.ScriptsJS.resources

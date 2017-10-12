@@ -83,7 +83,7 @@ namespace PlmonFuncTestNunit.Helpers
                 });
 
             }
-            int j = 0;
+            int j = 1;
             for (var i = 0; i < _linksTableHeaderCollection.Count; i++)
             {
                 var text =_linksTableHeaderCollection[i].LinkText.ToString();
