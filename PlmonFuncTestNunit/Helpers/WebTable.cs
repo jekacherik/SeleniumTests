@@ -38,6 +38,7 @@ namespace PlmonFuncTestNunit.Helpers
                     _tableDatacollections.Add(new TableDatacollection
                     {
                         RowNumber = rowIndex,
+                        ColumnIndex = colIndex,
                         ColumnName = columns[colIndex].Text != "" ?
                                      columns[colIndex].Text : colIndex.ToString(),
                         ColumnValue = colValue.Text
@@ -48,6 +49,36 @@ namespace PlmonFuncTestNunit.Helpers
                 }
                 rowIndex++;
             }
+        }
+
+        public static void ClickTable(IWebElement table,int row , int column)
+        {
+
+            var Rows = table.FindElements(By.TagName("tr"));
+            var countRows = Rows.Count;
+            if (row >= 1 && row < countRows)
+            {
+                var Columns = Rows[row].FindElements(By.TagName("td"));
+                if (column >= 0 && column < Columns.Count)
+                {
+                    var text = Columns[column].Text;
+                    PropertiesCollection._reportingTasks.Log(Status.Info, "Click on Cell with text :" + text);
+                    Columns[column].Click();
+                }
+                else
+                {
+
+                    Assert.Fail("Such a cell does NOT exist!!! Checked index Column ");
+
+                }
+            }
+            else
+            {
+
+                Assert.Fail("Such a cell does NOT exist!!! Checked index Row ");
+
+            }
+
         }
 
         public static string ReadCell(string columnName, int rowNumber)
@@ -83,7 +114,7 @@ namespace PlmonFuncTestNunit.Helpers
                 });
 
             }
-            int j = 1;
+            int j = 0;
             for (var i = 0; i < _linksTableHeaderCollection.Count; i++)
             {
                 var text =_linksTableHeaderCollection[i].LinkText.ToString();
@@ -100,6 +131,7 @@ namespace PlmonFuncTestNunit.Helpers
     public class TableDatacollection
     {
         public int RowNumber { get; set; }
+        public int ColumnIndex { get; set; }
         public string ColumnName { get; set; }
         public string ColumnValue { get; set; }
         public IWebElement ColumnSpecialValues { get; set; }

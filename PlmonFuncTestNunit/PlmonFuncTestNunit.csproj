@@ -116,6 +116,7 @@
     <Compile Include="PageObjects\PageObjectCP.cs" />
     <Compile Include="PageObjects\PageObjectStyle.cs" />
     <Compile Include="PageObjects\PagesManager.cs" />
+    <Compile Include="PageObjects\StyleInside.cs" />
     <Compile Include="PageObjects\StyleNEWPageObjects.cs" />
     <Compile Include="Scripts\ScriptsJS.Designer.cs">
       <AutoGen>True</AutoGen>

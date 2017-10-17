@@ -12,6 +12,7 @@ using PlmonFuncTestNunit.TestsInputData;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.Events;
 using System.Drawing.Imaging;
+using PlmonFuncTestNunit.Helpers;
 
 namespace PlmonFuncTestNunit
 {
@@ -83,6 +84,7 @@ namespace PlmonFuncTestNunit
         }
         public void IsLogin(String user)
         {
+            WindowsMessages w = new WindowsMessages();
             //Go to Desk Page
             _reportingTasks.CreateNode("User Authorization action");
             Goto(_config.PlmUrl);
@@ -94,12 +96,20 @@ namespace PlmonFuncTestNunit
                 //Go to Login page
                 driver.Navigate().GoToUrl(_config.PlmUrlDef);
                 var pagelogin = _pages.GetPage<LoginPageObjects>();
+                //if(w.IsAlertPresent())
+                //{
+                    pagelogin.Login(user, _config.Password);
+
+                    _reportingTasks.Log(Status.Info, user + " Login in the system");
+                    SeleniumGetMethod.WaitForPageLoad(driver);
+                //}
+                //else
+                //{
+                //    Assert.Fail("Failed Login !!!");
+                //}
 
                 //Get data for test User from Test and pass in config 
-                pagelogin.Login(user, _config.Password);
 
-                _reportingTasks.Log(Status.Info, user + " Login in the system");
-                SeleniumGetMethod.WaitForPageLoad(driver);
             }
             else
             {

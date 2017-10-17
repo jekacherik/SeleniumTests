@@ -1,7 +1,9 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using PlmonFuncTestNunit.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,8 +50,6 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.CssSelector, Using = "div[data-role=calendar] td[class~=k-today] a")]
         public IWebElement CurrentDate { get; set; }
 
-
-
         [FindsBy(How = How.Id, Using = "close_link")]
         public IWebElement ExcelExportCloseWait { get; set; }
 
@@ -62,13 +62,29 @@ namespace PlmonFuncTestNunit.PageObjects
             string newWndHandle = wndFinder.Click(btnNew);
             return new StyleNEWPageObjects(_pagesFactory, newWndHandle);
         }
-
+        public StyleInside Style()
+        {
+            PopupWindowFinder wndFinder = new PopupWindowFinder(driver);
+            string newWndHandle = wndFinder.Click(table);
+            return new StyleInside(_pagesFactory, newWndHandle);
+        }
         public void OpenStyle()
         {
             btnStyleDesk.Click();
             SeleniumGetMethod.WaitForPageLoad(driver);
             new WebDriverWait(driver, TimeSpan.FromSeconds(6000)).Until(ExpectedConditions.ElementExists((By.Id("lblHeader"))));
             Assert.AreEqual("Style Folder", lblHeader.Text, "Text not found!!!");
+        }
+
+        public void CkeckExcelBtn()
+        {
+            PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto Click Download Exel btn");
+            FileUploader.DownLoadFile(ExcelExport,ExcelExportCloseWait);
+        }
+        public void CkeckSortGrid()
+        {
+            PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto Sort Style Grid");
+            WebTable.ClickLinks(driver,table);   
         }
 
 

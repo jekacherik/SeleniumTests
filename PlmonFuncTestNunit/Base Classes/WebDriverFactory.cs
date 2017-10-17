@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Events;
 using System;
 using System.Collections.Generic;
@@ -40,9 +41,20 @@ namespace PlmonFuncTestNunit.Base_Classes
                     driver = new EdgeDriver(options);
                     driver.Manage().Window.Size = new Size(1920, 1080);
                     break;
-                    //case "Firefox":
-                    //    driver = new FirefoxDriver();
-                    //    break;
+                case "ChromeCloud":
+                    DesiredCapabilities capability = DesiredCapabilities.Chrome();
+                    capability.SetCapability("browserstack.user", "evgenia12");
+                    capability.SetCapability("browserstack.key", "y96s7V4XCXiy9DbaCw6q");
+                    capability.SetCapability("browser", "Chrome");
+                    capability.SetCapability("browser_version", "61.0");
+                    capability.SetCapability("os", "Windows");
+                    capability.SetCapability("os_version", "10");
+                    capability.SetCapability("resolution", "1920x1080");
+                    driver = new RemoteWebDriver(
+                      new Uri("http://hub-cloud.browserstack.com/wd/hub/"), capability);
+                    driver.Manage().Window.Maximize();
+                    break;
+
                 case "Chrome":
                 default:
                     //for downloads

@@ -37,13 +37,15 @@ namespace PlmonFuncTestNunit
         {
             //new WebDriverWait(Driver, TimeSpan.FromSeconds(30)).Until(ExpectedConditions.ElementExists((By.Id("cmdLogin"))));
             //userName
+            SeleniumGetMethod.WaitForPageLoad(driver);
             txtUserName.Click();
             txtUserName.EnterText(userName);
-
+            new WebDriverWait(driver, TimeSpan.FromSeconds(2000)).Until(ExpectedConditions.ElementExists((By.Id("txtUserPass"))));
             ////user password
             txtUserPass.Click();
             txtUserPass.EnterText(password);
             ////Click button
+            System.Threading.Thread.Sleep(1000);
             btnLogin.Click();
             System.Threading.Thread.Sleep(4000);
 

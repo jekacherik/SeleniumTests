@@ -12,6 +12,7 @@ using PlmonFuncTestNunit.Base_Classes;
 using PlmonFuncTestNunit.DB_connectors;
 using PlmonFuncTestNunit.Helpers;
 using System.IO;
+using System.Threading;
 
 namespace PlmonFuncTestNunit.Tests
 {
@@ -35,34 +36,23 @@ namespace PlmonFuncTestNunit.Tests
 
             // Go To Style Folder
             var pageStyle = _pages.GetPage<PageObjectStyle>();
-            _reportingTasks.Log(Status.Info, "UserAuto go to Style Folder " + driver.Url);
+
+            _reportingTasks.Log(Status.Info, "<b>UserAuto go to Style Folder</b> " + driver.Url);
             pageStyle.OpenStyle();
 
-            FileUploader.DownLoadFile(pageStyle.ExcelExport, pageStyle.ExcelExportCloseWait);
-            WebTable.ClickLinks(driver, pageStyle.table);
-            /*
-            //Click Row in Header 
-            pageStyle.rowHeader.Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementExists((By.Id("btnSearch"))));
-            new WebDriverWait(driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementIsVisible((By.Id("btnSearch"))));
-            pageStyle.btnSearch.Click();
-            System.Threading.Thread.Sleep(5000);
-            string URL = driver.Url;
-            Char deli = '?';
-            String[] substr = URL.Split(deli);
-            var parseUrl = substr[0];
-            string screenShotPath;
-            screenShotPath = Capture(driver, "testScreen");
-            if (parseUrl == "http://uiprototype80.dyn.yuniquecloud.com/plmOn/CustomError.aspx")
-            {
-                Assert.Fail("Found OOps!!!");
+            //pageStyle.CkeckExcelBtn();
+            pageStyle.CkeckSortGrid();
 
-            }
-            SeleniumGetMethod.WaitForPageLoad(driver);
-            var count = WebTable.TableCountColumns(pageStyle.table).ToString();
-            _reportingTasks.Log(Status.Info, count);
 
-            WebTable.ClickLinks(driver, pageStyle.table);*/
+            var pageStyleInside = _pages.GetPage<PageObjectStyle>().Style();
+            _reportingTasks.Log(Status.Info, "<b>UserAuto open Style</b>" + driver.Url);
+            Thread.Sleep(5000);
+
+            driver.SwitchTo().Window(pageStyleInside.WindowHandle).Close();
+            
+
+
+
         }
 
         [Test, Category("Function tests Style")]
@@ -73,6 +63,7 @@ namespace PlmonFuncTestNunit.Tests
             SetUp(browserName,user);
 
             //Insert Data for Login Table in DB
+            _reportingTasks.Log(Status.Debug, "INSERT VALUE TO LOGIN TABLE ");
             PostGreSQL pgTest = new PostGreSQL();
             pgTest.PostgreTestInsert();
             //Select from Login Table in DB
