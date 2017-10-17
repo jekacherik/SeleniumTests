@@ -71,6 +71,35 @@ namespace PlmonFuncTestNunit.Scripts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to document.getElementById(&quot;DataGrid1_ctl52_lblWorkflowName&quot;).scrollIntoView();.
+        /// </summary>
+        internal static string calendarCheckScrollDown {
+            get {
+                return ResourceManager.GetString("calendarCheckScrollDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to document.getElementById(&quot;DataGrid1_ctl23_lblWorkflowName&quot;).scrollIntoView();.
+        /// </summary>
+        internal static string calendarCheckScrollJustify {
+            get {
+                return ResourceManager.GetString("calendarCheckScrollJustify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to var el =document.querySelector(&apos;#DataGrid1 &gt; tbody &gt; tr.TableHeader &gt; td:nth-child(1) &gt; a&apos;);
+        ///el.scrollIntoView();
+        ///el.click();.
+        /// </summary>
+        internal static string calendarCheckScrollUp {
+            get {
+                return ResourceManager.GetString("calendarCheckScrollUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to var elements = [].slice.call(document.querySelectorAll(&quot;span[class~=rtPlus]&quot;));
         ///elements[17].click();.
         /// </summary>

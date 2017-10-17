@@ -217,4 +217,15 @@ elements[0].click();</value>
 minus.click();</value>
     <comment>MINUS</comment>
   </data>
+  <data name="calendarCheckScrollDown" xml:space="preserve">
+    <value>document.getElementById("DataGrid1_ctl52_lblWorkflowName").scrollIntoView();</value>
+  </data>
+  <data name="calendarCheckScrollJustify" xml:space="preserve">
+    <value>document.getElementById("DataGrid1_ctl23_lblWorkflowName").scrollIntoView();</value>
+  </data>
+  <data name="calendarCheckScrollUp" xml:space="preserve">
+    <value>var el =document.querySelector('#DataGrid1 &gt; tbody &gt; tr.TableHeader &gt; td:nth-child(1) &gt; a');
+el.scrollIntoView();
+el.click();</value>
+  </data>
 </root>

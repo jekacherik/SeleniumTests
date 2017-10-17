@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AventStack.ExtentReports;
+using System.IO;
+using System.Reflection;
 
 namespace PlmonFuncTestNunit.PageObjects
 {
@@ -137,6 +140,10 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "imgBtnSearch")]
         public IWebElement BtnSearchACt { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li> div > a")]
+        public IList<IWebElement> LinksLeft { get; set; }
+
+
 
         public void OpenCP()
         {
@@ -159,6 +166,35 @@ namespace PlmonFuncTestNunit.PageObjects
             //new WebDriverWait(driver, TimeSpan.FromSeconds(1000)).Until(ExpectedConditions.ElementExists((By.CssSelector("#btnAdd > div > span"))));
 
         }
+
+
+
+        public void CheckLeftMenuDirectory(string hrefLink)
+        {
+            int j = 0;
+            for (int i = 0; i < LinksLeft.Count; i++)
+            {
+                if (LinksLeft[i].GetAttribute("href").Contains(hrefLink))
+                {
+                    j = i;
+                    break;
+                }
+                else
+                {
+                    PropertiesCollection._reportingTasks.Log(Status.Info, "Something wrong...");
+                }
+                PropertiesCollection._reportingTasks.Log(Status.Info, LinksLeft[i].Text);
+                PropertiesCollection._reportingTasks.Log(Status.Info, LinksLeft[i].GetAttribute("href"));
+            }
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)PropertiesCollection.driver;
+            string path1 = Path.GetDirectoryName(Assembly.GetCallingAssembly().CodeBase);
+            string path2 = path1.Substring(0, path1.IndexOf("bin")) + ("Scripts\\cpClickPlus.js");
+            string path = new Uri(path2).LocalPath;
+            string jsString = File.ReadAllText(path);
+            executor.ExecuteScript(jsString.Replace("@", j.ToString()));
+        }
+
+
         public string labelTitle()
         {
             new WebDriverWait(driver, TimeSpan.FromSeconds(200)).Until(ExpectedConditions.ElementExists((By.Id("lblTitleOfPage"))));
