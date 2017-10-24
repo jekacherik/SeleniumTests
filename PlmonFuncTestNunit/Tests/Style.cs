@@ -16,24 +16,24 @@ using System.Threading;
 
 namespace PlmonFuncTestNunit.Tests
 {
-    [TestFixture]
-
+    [TestFixture("ie", "ET")]
+    [TestFixture("Edge", "ET")]
     //[Parallelizable]
     public class Style : PropertiesCollection
     {
         //private string title;
+        public Style(string browserName, string user) : base(browserName, user) { }
 
         //public string existingWindowHandle { get; private set; }
         List<string> dataItems = new List<string>();
 
-        [Test, Category("Function tests Style"),Description("Open Style Tests")]
-        [TestCaseSource("StyleData")]
-        public void CheckOpenStyle(string browserName, string user)
+        [Test, Category("Function tests Style")]
+        //[TestCaseSource("StyleData")]
+        public void CheckOpenStyle()
         {
-           
-            //Init Driver go to URL
-            SetUp(browserName, user);
 
+            //Init Driver go to URL
+            //SetUp(browserName, user);
             // Go To Style Folder
             var pageStyle = _pages.GetPage<PageObjectStyle>();
 
@@ -44,28 +44,28 @@ namespace PlmonFuncTestNunit.Tests
             pageStyle.CkeckSortGrid();
 
 
-            var pageStyleInside = _pages.GetPage<PageObjectStyle>().Style();
-            _reportingTasks.Log(Status.Info, "<b>UserAuto open Style</b>" + driver.Url);
-            Thread.Sleep(5000);
+            //var pageStyleInside = _pages.GetPage<PageObjectStyle>().Style();
+            //_reportingTasks.Log(Status.Info, "<b>UserAuto open Style</b>" + driver.Url);
+            //Thread.Sleep(5000);
 
-            driver.SwitchTo().Window(pageStyleInside.WindowHandle).Close();
-            
+            //driver.SwitchTo().Window(pageStyleInside.WindowHandle).Close();
+
 
 
 
         }
 
         [Test, Category("Function tests Style")]
-        [TestCaseSource("StyleData")]
-        public void CheckCreateStyle(String browserName, String user)
+        //[TestCaseSource("StyleData")]
+        public void CheckCreateStyle()
         {
             //Init Driver go to URL
-            SetUp(browserName,user);
+            //SetUp(browserName,user);
 
             //Insert Data for Login Table in DB
             _reportingTasks.Log(Status.Debug, "INSERT VALUE TO LOGIN TABLE ");
             PostGreSQL pgTest = new PostGreSQL();
-            pgTest.PostgreTestInsert();
+            //pgTest.PostgreTestInsert();
             //Select from Login Table in DB
             dataItems = pgTest.PostgreSQLtest1();
 

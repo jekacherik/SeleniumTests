@@ -3,12 +3,13 @@ using AventStack.ExtentReports.Reporter;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Web;
 
 namespace PlmonFuncTestNunit.Base_Classes
 {
@@ -52,6 +53,13 @@ namespace PlmonFuncTestNunit.Base_Classes
             string screenShotPath1;
             screenShotPath1 = Capture(driver, "errorScreen");
             _test.Log(Status.Error, name + _test.AddScreenCaptureFromPath(screenShotPath1));
+        }
+        public void BrowserNameLogged(IWebDriver driver)
+        {
+
+            //String userAgent = (String)((IJavaScriptExecutor)driver).ExecuteScript("return navigator.userAgent");
+            //String browserVersion = (String)((IJavaScriptExecutor)driver).ExecuteScript("return navigator.appVersion");
+            //_test.Log(Status.Debug, userAgent+" // "+ browserVersion);
         }
         /// <summary>
         /// Finalizes the test.

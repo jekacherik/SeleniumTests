@@ -25,13 +25,14 @@ namespace PlmonFuncTestNunit.Base_Classes
             {
                 case "ie":
                     InternetExplorerOptions ieoptions = new InternetExplorerOptions();
-                    //ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+                    ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
                     ////ieoptions.EnsureCleanSession = true;
-                    ieoptions.EnableNativeEvents = true;
-                    ////ieoptions.IgnoreZoomLevel = true;
-                    ieoptions.RequireWindowFocus = true;
+                    //ieoptions.EnableNativeEvents = true;
+                    //ieoptions.IgnoreZoomLevel = true;
+                    //ieoptions.EnableNativeEvents = true;
+                    //ieoptions.RequireWindowFocus = true;
                     //ieoptions.PageLoadStrategy = InternetExplorerPageLoadStrategy.Normal;
-                    //ieoptions.BrowserCommandLineArguments = "-nomerge";
+                    ieoptions.BrowserCommandLineArguments = "-nomerge";
                     driver = new InternetExplorerDriver(ieoptions);
                     driver.Manage().Window.Maximize();
                     break;
@@ -55,6 +56,19 @@ namespace PlmonFuncTestNunit.Base_Classes
                     driver.Manage().Window.Maximize();
                     break;
 
+                case "FirefoxCloud":
+                    DesiredCapabilities cap = DesiredCapabilities.Firefox();
+                    cap.SetCapability("browserstack.user", "evgenia12");
+                    cap.SetCapability("browserstack.key", "y96s7V4XCXiy9DbaCw6q");
+                    cap.SetCapability("browser", "Firefox");
+                    cap.SetCapability("browser_version", "57.0 beta");
+                    cap.SetCapability("os", "Windows");
+                    cap.SetCapability("os_version", "10");
+                    cap.SetCapability("resolution", "1920x1080");
+                    driver = new RemoteWebDriver(
+                      new Uri("http://hub-cloud.browserstack.com/wd/hub/"), cap);
+                    driver.Manage().Window.Maximize();
+                    break;
                 case "Chrome":
                 default:
                     //for downloads

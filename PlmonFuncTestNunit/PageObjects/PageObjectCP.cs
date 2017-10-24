@@ -60,61 +60,6 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "btnExcelExport")]
         public IWebElement DownLoadButton { get; set; }
 
-        /*SELECTOTS FOR EACH SUBITEMS IN CONTROL PANEL*/
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(1) > ul > li > div > a")]
-        public IList<IWebElement> CpWorkflowsItems { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(2) > ul > li > div > a")]
-        public IList<IWebElement> CpTemplatesItems { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(3) > ul > li > div > a")]
-        public IList<IWebElement> CpMeasurementItems { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(4) > ul > li > div > a")]
-        public IList<IWebElement> CpMatSubTypItems { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(5) > ul > li > div > a")]
-        public IList<IWebElement> CpMatValTables { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(6) > ul > li > div > a")]
-        public IList<IWebElement> CpImgValTables { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(7) > ul > li > div > a")]
-        public IList<IWebElement> CpColorValTables { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(8) > ul > li > div > a")]
-        public IList<IWebElement> CpGenValTables { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(9) > ul > li > div > a")]
-        public IList<IWebElement> CpCare { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(10) > ul > li > div > a")]
-        public IList<IWebElement> CpBillofLabor { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(11) > ul > li > div > a")]
-        public IList<IWebElement> CpLineList { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(12) > ul > li > div > a")]
-        public IList<IWebElement> CpFlashCosting { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(13) > ul > li > div > a")]
-        public IList<IWebElement> CpSourcing { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(14) > ul > li > div > a")]
-        public IList<IWebElement> CpPartner { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(15) > ul > li > div > a")]
-        public IList<IWebElement> CpPlanning { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(16) > ul > li > div > a")]
-        public IList<IWebElement> CpCalendar { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(17) > ul > li > div > a")]
-        public IList<IWebElement> CpTechPacks { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#LeftMenu_ControlLeftMenuYSTreeView1 > ul > li > ul > li:nth-child(18) > ul > li > div > a")]
-        public IList<IWebElement> CpPlugin { get; set; }
                              /*-------------------------------------------------------------------------------------*/
         [FindsBy(How = How.XPath, Using = "//*[@id='LeftMenu_ControlLeftMenuYSTreeView1']/ul/li/ul/li[16]/div/span[2]")]
         public IWebElement CalendarArrow { get; set; }

@@ -79,7 +79,7 @@ namespace PlmonFuncTestNunit.TestsInputData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://uiprototype80.dyn.yuniquecloud.com/YuniqueBI/BI/BI_Main.aspx.
+        ///   Looks up a localized string similar to http://mr-qa-ux-800.yuniquecloud.com/plmOn/Desk/.
         /// </summary>
         internal static string Desk {
             get {

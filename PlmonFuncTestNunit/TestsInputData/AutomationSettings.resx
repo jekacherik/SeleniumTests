@@ -124,7 +124,7 @@
     <value>ie,Chrome,Edge</value>
   </data>
   <data name="Desk" xml:space="preserve">
-    <value>http://uiprototype80.dyn.yuniquecloud.com/YuniqueBI/BI/BI_Main.aspx</value>
+    <value>http://mr-qa-ux-800.yuniquecloud.com/plmOn/Desk/</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>plmon1234@</value>

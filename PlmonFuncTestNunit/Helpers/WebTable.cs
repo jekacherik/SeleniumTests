@@ -105,7 +105,7 @@ namespace PlmonFuncTestNunit.Helpers
 
             var Rows = table.FindElements(By.TagName("tr"));
             string href = "";
-            foreach (IWebElement item in Rows[1].FindElements(By.TagName("a")))
+            foreach (IWebElement item in Rows[0].FindElements(By.TagName("a")))
             {
                 href = item.Text;
                 _linksTableHeaderCollection.Add(new LinksTableHeaderCollection

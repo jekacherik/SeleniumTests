@@ -1,3 +1,3 @@
-INSERT INTO public.login
+INSERT INTO login
 (did, "name", password)
-VALUES(10, 'userTextTest2', 'passwordTextTest2');
+VALUES(4, 'DEMOTest', 'passwordTextTest2');

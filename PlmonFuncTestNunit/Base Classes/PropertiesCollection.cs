@@ -25,18 +25,23 @@ namespace PlmonFuncTestNunit
         Xpath
 
     }
-
+    [TestFixture]
     public class PropertiesCollection : GetSreenShot
     {
         //Auto-implemented property
-        //protected ExtentReports _extent;
-        //protected ExtentTest _test;
         public static IWebDriver driver;
         protected TestsConfiguration _config = null;
         protected PagesManager _pages = null;
         public static ReportingTasks _reportingTasks;
 
+        protected string browserName;
+        protected string user;
 
+        public PropertiesCollection(string browserName, string user)
+        {
+            this.browserName = browserName;
+            this.user = user;
+        }
 
         [OneTimeSetUp]
         protected void StartReport()
@@ -49,11 +54,10 @@ namespace PlmonFuncTestNunit
 
             _reportingTasks = new ReportingTasks(extentReports);
 
-
-
         }
 
-        public void SetUp(String browserName, String user)
+        [SetUp]
+        public void SetUp()
         {
 
 
@@ -62,6 +66,7 @@ namespace PlmonFuncTestNunit
 
             //Init Web driver  
             driver = WebDriverFactory.GetWebDriver(browserName);
+            _reportingTasks.Log(Status.Debug, "<b>Tests executed in " + browserName);
             EventFiringWebDriver firingDriver = new EventFiringWebDriver(driver);
             firingDriver.ExceptionThrown += FiringDriver_TakeScreenshotOnException;
             firingDriver.ElementClicked += FiringDriver_Cliked;
@@ -90,33 +95,24 @@ namespace PlmonFuncTestNunit
             Goto(_config.PlmUrl);
             SeleniumGetMethod.WaitForPageLoad(driver);
             //If User not login 
-            if (driver.Url.IndexOf("/BI/BI_Main.aspx", StringComparison.OrdinalIgnoreCase) == -1)
+            if (driver.Url.IndexOf("plmOn/Desk/", StringComparison.OrdinalIgnoreCase) == -1)
             {
                 SeleniumGetMethod.WaitForPageLoad(driver);
                 //Go to Login page
                 driver.Navigate().GoToUrl(_config.PlmUrlDef);
                 var pagelogin = _pages.GetPage<LoginPageObjects>();
-                //if(w.IsAlertPresent())
-                //{
-                    pagelogin.Login(user, _config.Password);
+                pagelogin.Login(user, _config.Password);
 
-                    _reportingTasks.Log(Status.Info, user + " Login in the system");
-                    SeleniumGetMethod.WaitForPageLoad(driver);
-                //}
-                //else
-                //{
-                //    Assert.Fail("Failed Login !!!");
-                //}
-
-                //Get data for test User from Test and pass in config 
+                _reportingTasks.Log(Status.Info, user + " Login in the system");
+                SeleniumGetMethod.WaitForPageLoad(driver);
 
             }
             else
             {
-                //if (InternetExplorerDriver )
-                //{
-                //    driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
-                //}
+                if (browserName == "Edge")
+                {
+                    driver.ExecuteJavaScript(@"window.onbeforeunload = function(){}");
+                }
 
             }
         }
