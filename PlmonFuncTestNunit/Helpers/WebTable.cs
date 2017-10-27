@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -119,13 +120,49 @@ namespace PlmonFuncTestNunit.Helpers
             {
                 var text =_linksTableHeaderCollection[i].LinkText.ToString();
                 var linkf = driver.FindElement(By.LinkText(text));
-                linkf.Click();
+                ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].style.visibility = 'visible'; arguments[0].style.display = 'block';", linkf);
+                ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", linkf);
+                SeleniumGetMethod.WaitForPageLoad(driver);
                 j++;
                 //PropertiesCollection._reportingTasks.Log(Status.Info, text);
-                SeleniumGetMethod.WaitForPageLoad(driver);
+                
+                //SeleniumGetMethod.WaitForPageLoad(driver);
             }
             Assert.AreEqual(j, _linksTableHeaderCollection.Count, "Count of links are DIFFERENT!!!");
         }
+        public static int DragDropHeaderTable(IWebDriver driver, IWebElement table)
+        {
+
+            var Rows = table.FindElements(By.TagName("tr"));
+            string href = "";
+            foreach (IWebElement item in Rows[0].FindElements(By.TagName("a")))
+            {
+                href = item.Text;
+                _linksTableHeaderCollection.Add(new LinksTableHeaderCollection
+                {
+                    LinkText = href
+                });
+
+            }
+            int j = 0;
+            for (var i = 0; i < _linksTableHeaderCollection.Count; i++)
+            {
+                var text = _linksTableHeaderCollection[i].LinkText.ToString();
+                var linkf = driver.FindElement(By.LinkText(text));
+                IWebElement drag = linkf;
+                IWebElement drop = driver.FindElement(By.CssSelector("#ctrGrid_RadGridStyles_GroupPanel_TB > tbody > tr > td > table"));
+
+                (new Actions(driver)).ClickAndHold(drag).MoveToElement(drop).DragAndDrop(drag, drop).Perform();
+                SeleniumGetMethod.WaitForPageLoad(driver);
+                j++;
+                //PropertiesCollection._reportingTasks.Log(Status.Info, text);
+
+                //SeleniumGetMethod.WaitForPageLoad(driver);
+            }
+            Assert.AreEqual(j, _linksTableHeaderCollection.Count, "Count of links are DIFFERENT!!!");
+            return j;
+        }
+
     }
 
     public class TableDatacollection

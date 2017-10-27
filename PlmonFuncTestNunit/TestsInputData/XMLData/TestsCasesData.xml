@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testCasesData>
+  <testCaseDataItem>
+    <testMethodName>CheckOpenStyle</testMethodName>
+    <testName>CheckOpenStyle_MaxValue</testName>
+    <category>Style</category>
+    <description>Check saved search for Max Value</description>
+	<inputData>
+    <txtSearchName>ghjggggggggggggggggggggggggggggggggggggg1gggggg ggg</txtSearchName>
+	</inputData>
+  </testCaseDataItem>
+    <testCaseDataItem>
+    <testMethodName>CheckOpenStyle</testMethodName>
+    <testName>CheckOpenStyle_Spes</testName>
+    <category>Style</category>
+    <description>Check saved search for !@#$%</description>
+	<inputData>
+    <txtSearchName>!!@@#%$^%^*(*(</txtSearchName>
+	</inputData>
+  </testCaseDataItem>
+  <testCaseDataItem>
+    <testMethodName>CheckOpenStyle</testMethodName>
+    <testName>CheckOpenStyle_Long string</testName>
+    <category>Style</category>
+    <description>Check saved search</description>
+	<inputData>
+    <txtSearchName>112211111</txtSearchName>
+	</inputData>
+  </testCaseDataItem>
+   <testCaseDataItem>
+    <testMethodName>CheckCreateStyle</testMethodName>
+    <testName>CheckCreateStyle</testName>
+    <category>Style</category>
+    <description>Create Style required fields</description>
+	<styleHeader>
+	<sizeClass>Mens</sizeClass>
+	<sizeRange>XS - XL</sizeRange>
+	</styleHeader>
+  </testCaseDataItem>
+  <testCaseDataItem>
+    <testMethodName/>
+    <testName/>
+    <category/>
+    <description/>
+    <testWithoutData>
+      <ignoreReason>Тест без опознавательных знаков (не обнаруживается)</ignoreReason>
+    </testWithoutData>
+  </testCaseDataItem>
+</testCasesData>
+

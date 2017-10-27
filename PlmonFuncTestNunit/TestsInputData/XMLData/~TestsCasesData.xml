@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testCasesData>
+  <testCaseDataItem>
+    <testMethodName>CheckOpenStyle</testMethodName>
+    <testName>CheckOpenStyle_MaxValue</testName>
+    <category>Style</category>
+    <description>Check saved search for Max Value</description>
+	<inputData>
+    <txtSearchName>ghjggggggggggggggggggggggggggggggggggggg1gggggg ggg</txtSearchName>
+	</inputData>
+  </testCaseDataItem>
+  <testCaseDataItem>
+    <testMethodName>CheckOpenStyle</testMethodName>
+    <testName>CheckOpenStyle_Long string</testName>
+    <category>Style</category>
+    <description>Check saved search</description>
+	<inputData>
+    <txtSearchName>11221</txtSearchName>
+	</inputData>
+  </testCaseDataItem>
+  <testCaseDataItem>
+    <testMethodName/>
+    <testName/>
+    <category/>
+    <description/>
+    <testWithoutData>
+      <ignoreReason>Тест без опознавательных знаков (не обнаруживается)</ignoreReason>
+    </testWithoutData>
+  </testCaseDataItem>
+</testCasesData>

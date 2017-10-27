@@ -8,7 +8,16 @@ using System.Threading.Tasks;
 
 namespace PlmonFuncTestNunit
 {
-   public static class SeleniumSetMethods
+    enum SelectType
+    {
+        Id,
+        Name,
+        CssName,
+        ClassName,
+        Xpath
+
+    }
+    public static class SeleniumSetMethods
     {
         //Enter Text
         /// <summary>

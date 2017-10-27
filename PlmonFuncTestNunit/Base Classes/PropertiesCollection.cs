@@ -63,7 +63,8 @@ namespace PlmonFuncTestNunit
 
             //Init test Name to log
             _reportingTasks.InitializeTest();
-
+            var Description = TestContext.CurrentContext.Test.Properties.Get("Description")?.ToString() ?? string.Empty;
+            _reportingTasks.Log(Status.Info, "<h4>Description test </h4>"+Description + "<br>");
             //Init Web driver  
             driver = WebDriverFactory.GetWebDriver(browserName);
             _reportingTasks.Log(Status.Debug, "<b>Tests executed in " + browserName);

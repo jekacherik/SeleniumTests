@@ -140,6 +140,9 @@
     </Compile>
     <Compile Include="PageObjects\BasePageObject.cs" />
     <Compile Include="TestsInputData\ExelUnit.cs" />
+    <Compile Include="TestsInputData\Style\InputData.cs" />
+    <Compile Include="TestsInputData\Style\StyleHeaderData.cs" />
+    <Compile Include="TestsInputData\TestCaseDataItem.cs" />
     <Compile Include="Tests\ControlPanel.cs" />
     <Compile Include="Tests\Image.cs" />
     <Compile Include="Tests\Login.cs" />

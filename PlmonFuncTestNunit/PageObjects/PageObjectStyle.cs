@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Interactions;
+using PlmonFuncTestNunit.TestsInputData.Style;
 
 namespace PlmonFuncTestNunit.PageObjects
 {
@@ -29,9 +31,21 @@ namespace PlmonFuncTestNunit.PageObjects
 
         [FindsBy(How = How.CssSelector, Using = "#header-search > div > div")]
         public IWebElement rowHeader { get; set; }
-
-        [FindsBy(How = How.Id, Using = "btnSearch")]
+        
+        //Element for Search 
+        [FindsBy(How = How.Id, Using = "imgBtnSearch")]
         public IWebElement btnSearch { get; set; }
+
+
+        [FindsBy(How = How.CssSelector, Using = "[expander-id = searchDropdownExpander]")]
+        public IWebElement spanSearch { get; set; }
+
+        [FindsBy(How = How.Name, Using = "txtSearchName")]
+        public IWebElement txtSearchName { get; set; }
+
+        [FindsBy(How = How.Id, Using = "btnSaveSearch")]
+        public IWebElement btnSaveSearch { get; set; }
+        //
 
         [FindsBy(How = How.Id, Using = "btnNew")]
         public IWebElement btnNew { get; set; }
@@ -63,6 +77,10 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.Id, Using = "ctrGrid_RadGridStyles_ctl00")]
         public IWebElement table { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "[class=rgUngroup]")]
+        public IList<IWebElement> cross { get; set; }
+        
+
         public void SwitchToMenu()
         {
             SeleniumGetMethod.WaitForPageLoad(driver);
@@ -80,12 +98,14 @@ namespace PlmonFuncTestNunit.PageObjects
         }
         public StyleNEWPageObjects ClickNewStyle()
         {
+            SwitchToMain();
             PopupWindowFinder wndFinder = new PopupWindowFinder(driver);
             string newWndHandle = wndFinder.Click(btnNew);
             return new StyleNEWPageObjects(_pagesFactory, newWndHandle);
         }
         public StyleInside Style()
         {
+            SwitchToMain();
             PopupWindowFinder wndFinder = new PopupWindowFinder(driver);
             string newWndHandle = wndFinder.Click(table);
             return new StyleInside(_pagesFactory, newWndHandle);
@@ -108,13 +128,42 @@ namespace PlmonFuncTestNunit.PageObjects
             new WebDriverWait(driver, TimeSpan.FromSeconds(2000)).Until(ExpectedConditions.ElementIsVisible((By.Id("btnExcelExport"))));
             FileUploader.DownLoadFile(ExcelExport,ExcelExportCloseWait);
         }
+        public void CheckSearchMenu(InputData dataForTest)
+        {
+            SwitchToMain();
+            //spanSearch.Click();
+            SeleniumGetMethod.WaitForPageLoad(driver);
+            txtSearchName.EnterText(dataForTest.TxtSearchName);
+            btnSaveSearch.Click();
+            //spanSearch.Click();
+            btnSearch.Click();
+        }
         public void CkeckSortGrid()
         {
             SwitchToMain();
             PropertiesCollection._reportingTasks.Log(Status.Info, "UserAuto Sort Style Grid");
             WebTable.ClickLinks(driver,table);   
         }
+        public void DragDrop()
+        {
+            SwitchToMain();
+            var countColumDrag = WebTable.DragDropHeaderTable(driver,table);
+            SeleniumGetMethod.WaitForPageLoad(driver);
+            int countDropCross = cross.Count;
+            
+            Assert.AreEqual(countColumDrag, countDropCross, "Count Drag Colum are not equal Count crosses ");
+            int k = 0;
+            for (var i=0;i< countDropCross; i++)
+            {
+                //cross[i].Click();
+                var cr = driver.FindElement(By.ClassName("rgUngroup"));
+                ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();",cr);
+                SeleniumGetMethod.WaitForPageLoad(driver);
+                ++k;
+            }
+            Assert.AreEqual(countDropCross, k, "The number of clicks on crosses is not equal to the number of crosses found");
 
+        }
 
 
     }

@@ -26,11 +26,9 @@ namespace PlmonFuncTestNunit.Base_Classes
                 case "ie":
                     InternetExplorerOptions ieoptions = new InternetExplorerOptions();
                     ieoptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
-                    ////ieoptions.EnsureCleanSession = true;
-                    //ieoptions.EnableNativeEvents = true;
-                    //ieoptions.IgnoreZoomLevel = true;
-                    //ieoptions.EnableNativeEvents = true;
-                    //ieoptions.RequireWindowFocus = true;
+                    ieoptions.EnsureCleanSession = true;
+                    ieoptions.IgnoreZoomLevel = true;
+                    ieoptions.RequireWindowFocus = true;
                     //ieoptions.PageLoadStrategy = InternetExplorerPageLoadStrategy.Normal;
                     ieoptions.BrowserCommandLineArguments = "-nomerge";
                     driver = new InternetExplorerDriver(ieoptions);

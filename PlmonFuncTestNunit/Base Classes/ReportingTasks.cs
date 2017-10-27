@@ -35,7 +35,7 @@ namespace PlmonFuncTestNunit.Base_Classes
         {
             _test = _extent
                 .CreateTest("<h5>" + TestContext.CurrentContext.Test.ClassName + "</h5><br>" + TestContext.CurrentContext.Test.Name)
-                .AssignCategory("<font color='green'>" + TestContext.CurrentContext.Test.ClassName + "</font>")
+                .AssignCategory("<font color='green'>" + TestContext.CurrentContext.Test.Properties.Get("Category")?.ToString() ?? string.Empty + "</font>")
                 .CreateNode("Test actions")
                 .AssignAuthor("Evgenia") ;
         }

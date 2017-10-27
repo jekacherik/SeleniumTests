@@ -13,11 +13,14 @@ using PlmonFuncTestNunit.DB_connectors;
 using PlmonFuncTestNunit.Helpers;
 using System.IO;
 using System.Threading;
+using OpenQA.Selenium.Interactions;
+using PlmonFuncTestNunit.TestsInputData.Style;
 
 namespace PlmonFuncTestNunit.Tests
 {
-    [TestFixture("ie", "ET")]
-    [TestFixture("Edge", "ET")]
+    //[TestFixture("ie", "ET")]
+    //[TestFixture("Edge", "ET")]
+    [TestFixture("Chrome", "ET")]
     //[Parallelizable]
     public class Style : PropertiesCollection
     {
@@ -28,17 +31,22 @@ namespace PlmonFuncTestNunit.Tests
         List<string> dataItems = new List<string>();
 
         [Test, Category("Function tests Style")]
-        //[TestCaseSource("StyleData")]
-        public void CheckOpenStyle()
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetInputDataForTest))]
+        public void CheckOpenStyle(InputData dataInput)
         {
 
             //Init Driver go to URL
             //SetUp(browserName, user);
             // Go To Style Folder
+            if (!string.IsNullOrEmpty(dataInput.ReadingDataError)) Assert.Fail(dataInput.ReadingDataError);
+            if (!string.IsNullOrEmpty(dataInput.IgnoreReason)) Assert.Ignore(dataInput.IgnoreReason);
+
             var pageStyle = _pages.GetPage<PageObjectStyle>();
 
             _reportingTasks.Log(Status.Info, "<b>UserAuto go to Style Folder</b> " + driver.Url);
             pageStyle.OpenStyle();
+            pageStyle.CheckSearchMenu(dataInput);
+            pageStyle.DragDrop();
 
             //pageStyle.CkeckExcelBtn();
             pageStyle.CkeckSortGrid();
@@ -56,8 +64,8 @@ namespace PlmonFuncTestNunit.Tests
         }
 
         [Test, Category("Function tests Style")]
-        //[TestCaseSource("StyleData")]
-        public void CheckCreateStyle()
+        //[TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetStyleHeadersData))]
+        public void CheckExistsValidatorCreateStyle()
         {
             //Init Driver go to URL
             //SetUp(browserName,user);
@@ -67,7 +75,7 @@ namespace PlmonFuncTestNunit.Tests
             PostGreSQL pgTest = new PostGreSQL();
             //pgTest.PostgreTestInsert();
             //Select from Login Table in DB
-            dataItems = pgTest.PostgreSQLtest1();
+            //dataItems = pgTest.PostgreSQLtest1();
 
             SeleniumGetMethod.WaitForPageLoad(driver);
             // Go To Style Folder
@@ -80,6 +88,25 @@ namespace PlmonFuncTestNunit.Tests
             //Check page New Header
             pageNew.CheckValidators();
 
+        }
+
+        [Test, Category("Function tests Style")]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetStyleHeadersData))]
+        public void CheckCreateStyle(StyleHeaderData data)
+        {
+
+
+            SeleniumGetMethod.WaitForPageLoad(driver);
+            // Go To Style Folder
+            var pageStyle = _pages.GetPage<PageObjectStyle>();
+            _reportingTasks.Log(Status.Info, "UserAuto go to Style Folder " + "<br>" + driver.Url + "</br>");
+            pageStyle.OpenStyle();
+
+            //Go to Style New
+            var pageNew = _pages.GetPage<PageObjectStyle>().ClickNewStyle();
+            //Check page New Header
+            pageNew.Createpage(data);
+            driver.SwitchTo().Window(pageNew.WindowHandle).Close();
         }
 
         public static IEnumerable<TestCaseData> StyleData
@@ -97,5 +124,26 @@ namespace PlmonFuncTestNunit.Tests
             }
         }
     }
+    public class TestDataSource
+    {
+        private static string XmlFileName { get; set; }
+        static TestDataSource()
+        {
+            var testsConfig = TestsConfiguration.Instance;
+            
 
+            string pathGl = Path.GetDirectoryName(System.Reflection.Assembly.GetCallingAssembly().CodeBase);
+            string path = pathGl.Substring(0, pathGl.IndexOf("bin")) + ("TestsInputData\\XMLData\\TestsCasesData.xml");
+            string projectPth = new Uri(path).LocalPath;
+
+            XmlFileName = projectPth;
+            _getInputDataForTest = TestCasesDataLoader.Load<InputData>(XmlFileName, nameof(Style.CheckOpenStyle));
+            _getStyleHeadersData = TestCasesDataLoader.Load<StyleHeaderData>(XmlFileName, nameof(Style.CheckCreateStyle));
+        }
+        private static Func<IEnumerable<TestCaseData>> _getInputDataForTest;
+        public static IEnumerable<TestCaseData> GetInputDataForTest() => _getInputDataForTest();
+        private static Func<IEnumerable<TestCaseData>> _getStyleHeadersData;
+        public static IEnumerable<TestCaseData> GetStyleHeadersData() => _getStyleHeadersData();
+
+    }
 }
