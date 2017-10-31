@@ -116,6 +116,7 @@
     <Compile Include="Base Classes\WebDriverFactory.cs" />
     <Compile Include="DB connectors\PostGreSQL.cs" />
     <Compile Include="Helpers\FileUploader.cs" />
+    <Compile Include="Helpers\Paging.cs" />
     <Compile Include="Helpers\Randomizer.cs" />
     <Compile Include="Helpers\Scrolling.cs" />
     <Compile Include="Helpers\SwitchToFrameHelper.cs" />

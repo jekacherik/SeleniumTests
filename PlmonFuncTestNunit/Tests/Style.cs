@@ -44,12 +44,16 @@ namespace PlmonFuncTestNunit.Tests
             var pageStyle = _pages.GetPage<PageObjectStyle>();
 
             _reportingTasks.Log(Status.Info, "<b>UserAuto go to Style Folder</b> " + driver.Url);
+
+           
             pageStyle.OpenStyle();
+            pageStyle.CheckGettingDate();
+            pageStyle.CheckPagingInStyleFolder();
             pageStyle.CheckSearchMenu(dataInput);
             pageStyle.DragDrop();
 
             //pageStyle.CkeckExcelBtn();
-            pageStyle.CkeckSortGrid();
+            //pageStyle.CkeckSortGrid();
 
 
             //var pageStyleInside = _pages.GetPage<PageObjectStyle>().Style();

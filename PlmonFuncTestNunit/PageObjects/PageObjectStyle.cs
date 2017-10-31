@@ -12,6 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Interactions;
 using PlmonFuncTestNunit.TestsInputData.Style;
+using System.IO;
+using System.Reflection;
+using System.Threading;
 
 namespace PlmonFuncTestNunit.PageObjects
 {
@@ -66,8 +69,6 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.XPath, Using = "(//*[contains(@src, 'icon_calendar')])[2]")]
         public IWebElement CalendarIconSecond { get; set; }
 
-        //[FindsBy(How = How.XPath, Using = "//*[@id='thedate']//td[@class='fontHead']/a")]
-        //[FindsBy(How = How.XPath, Using = "//*[contains(@class, 'k-today')]/a")]
         [FindsBy(How = How.CssSelector, Using = "div[data-role=calendar] td[class~=k-today] a")]
         public IWebElement CurrentDate { get; set; }
 
@@ -79,7 +80,67 @@ namespace PlmonFuncTestNunit.PageObjects
 
         [FindsBy(How = How.CssSelector, Using = "[class=rgUngroup]")]
         public IList<IWebElement> cross { get; set; }
-        
+
+        [FindsBy(How = How.Id, Using = "txtDueDate")]
+        public IWebElement CalBoxTechPack { get; set; }
+
+        //elements for Excel Export
+        [FindsBy(How = How.CssSelector, Using = "span[expander-id~=viewTypeDropdownExpander]")]
+        public IList<IWebElement> ViewExpander { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#tb_3 > span")]
+        public IList<IWebElement> ListViewClicker { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#menuExpanderHandle > span")]
+        public IList<IWebElement> ExpandToolsForExcel { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "li>#btnExcelExport")]
+        public IList<IWebElement> NewJsExcel { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#close_link")]
+        public IList<IWebElement> ExcelExpCloseWaitSpinner { get; set; }
+
+        //PAGING
+        [FindsBy(How = How.CssSelector, Using = "#ctrGrid_RecordCount > strong")]
+        public IWebElement RecordsFound { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#ctrGrid_ps")]
+        public IWebElement SelectPerPage { get; set; }
+
+        [FindsBy(How = How.Id, Using = "ctrGrid_btnGo")]
+        public IWebElement SetPagesGo { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#ctrGrid_lblPageCount")]
+        public IWebElement QuantityOfPages { get; set; }
+
+        [FindsBy(How = How.Id, Using = "ctrGrid_btnImgNext")]
+        public IWebElement BtnNextPage { get; set; }
+
+        [FindsBy(How = How.Id, Using = "ctrGrid_btnImgPrevious")]
+        public IWebElement BtnPrevPage { get; set; }
+
+        [FindsBy(How = How.Id, Using = "ctrGrid_btnImgFirst")]
+        public IWebElement BtnFirstPage { get; set; }
+
+        [FindsBy(How = How.Id, Using = "ctrGrid_btnImgLast")]
+        public IWebElement BtnLastPage { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#ctrGrid_RadGridStyles_ctl00 tbody tr")]
+        public IList<IWebElement> GridRows { get; set; }
+
+        string recordsFound = "#ctrGrid_RecordCount > strong";
+        string dropdownSelectPerPage = "#ctrGrid_ps";
+        string goButton = "ctrGrid_btnGo";
+        string pagesaQua = "#ctrGrid_lblPageCount";
+        string nextPge = "ctrGrid_btnImgNext";
+        string prevPage = "ctrGrid_btnImgPrevious";
+        string lastPage = "ctrGrid_btnImgLast";
+        string firstPage = "ctrGrid_btnImgFirst";
+        string setGotoPage = "#ctrGrid_txtSkipToPg";
+        string goToSkipPage = "#ctrGrid_btnImgSkipTo";
+        string tableRecords = "#ctrGrid_RadGridStyles_ctl00 tbody tr";
+
+
 
         public void SwitchToMenu()
         {
@@ -96,6 +157,69 @@ namespace PlmonFuncTestNunit.PageObjects
             SwitchToFrameHelper.ToMainFrame(driver);
             
         }
+
+        public PagingData StyleFolderPaging
+        {
+            get
+            {
+                PagingData parametes = new PagingData();
+                parametes.recordsFound = recordsFound;
+                parametes.dropdownSelectPerPage = dropdownSelectPerPage;
+                parametes.goButton = goButton;
+                parametes.pagesQua = pagesaQua;
+                parametes.nextPage = nextPge;
+                parametes.prevPage = prevPage;
+                parametes.lastPage = lastPage;
+                parametes.firstPage = firstPage;
+                parametes.setGotoPage = setGotoPage;
+                parametes.goToSkipPage = goToSkipPage;
+                parametes.tableRecors = tableRecords;
+                return parametes;
+            }
+        }
+
+
+        public void ExcelNewCheck()
+        {
+            string browserName = (String)((IJavaScriptExecutor)driver).ExecuteScript("return navigator.userAgent;");
+            int quantityFilesBefore = 0, quantityFilesAfter = 0;
+            string path1, path2, path = "pathToFile";
+            if (browserName.Contains("Chrome"))
+            {
+                path1 = Path.GetDirectoryName(Assembly.GetCallingAssembly().CodeBase);
+                path2 = path1.Substring(0, path1.IndexOf("bin")) + ("Downloads\\");
+                path = new Uri(path2).LocalPath;
+                string[] filePaths = Directory.GetFiles(path);
+                quantityFilesBefore = filePaths.Count();
+            }
+            else
+            {
+                PropertiesCollection._reportingTasks.Log(Status.Info, description: "Works only in Chrome");
+            }
+            SwitchToMain();
+            SeleniumGetMethod.WaitForPageLoad(driver);
+            ((IJavaScriptExecutor)PropertiesCollection.driver).ExecuteScript("arguments[0].click();", ViewExpander[0]);
+            System.Threading.Thread.Sleep(3000);
+            ((IJavaScriptExecutor)PropertiesCollection.driver).ExecuteScript("arguments[0].click();", ListViewClicker[0]);
+            new WebDriverWait(PropertiesCollection.driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementToBeClickable(By.CssSelector("#ctrGrid_RadGridStyles_ctl00 > thead > tr > th:nth-child(1) > a")));
+            ((IJavaScriptExecutor)PropertiesCollection.driver).ExecuteScript("arguments[0].click();", ExpandToolsForExcel[0]);
+            System.Threading.Thread.Sleep(3000);
+            ((IJavaScriptExecutor)PropertiesCollection.driver).ExecuteScript("arguments[0].click();", NewJsExcel[0]);
+            new WebDriverWait(PropertiesCollection.driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementToBeClickable(ExcelExpCloseWaitSpinner[0]));
+            ExcelExpCloseWaitSpinner[0].Click();
+            if (browserName.Contains("Chrome"))
+            {
+                quantityFilesAfter = Directory.GetFiles(path).Count();
+                Assert.IsTrue(quantityFilesAfter > quantityFilesBefore, "Yes, downloading works");
+                PropertiesCollection._reportingTasks.Log(Status.Info, description: "Files founded BEFORE: " + quantityFilesBefore.ToString() + "<br>" + " Files founded AFTER : " + quantityFilesAfter.ToString());
+            }
+            else
+            {
+                PropertiesCollection._reportingTasks.Log(Status.Info, description: "Works only in Chrome");
+            }
+        }
+
+
         public StyleNEWPageObjects ClickNewStyle()
         {
             SwitchToMain();
@@ -103,6 +227,7 @@ namespace PlmonFuncTestNunit.PageObjects
             string newWndHandle = wndFinder.Click(btnNew);
             return new StyleNEWPageObjects(_pagesFactory, newWndHandle);
         }
+
         public StyleInside Style()
         {
             SwitchToMain();
@@ -110,6 +235,38 @@ namespace PlmonFuncTestNunit.PageObjects
             string newWndHandle = wndFinder.Click(table);
             return new StyleInside(_pagesFactory, newWndHandle);
         }
+
+        public void CheckPagingInStyleFolder()
+        {
+            SwitchToMain();
+            Paging paging = new Paging();
+            paging.CheckPaging(StyleFolderPaging);
+            btnSearch.Click();
+        }
+
+        public void CheckGettingDate()
+        {
+            SwitchToMain();
+            WindowsMessages windowsMessages = new WindowsMessages();
+            CalBoxTechPack.SendKeys(windowsMessages.GetCurDate(1));
+            btnSearch.Click();
+            SeleniumGetMethod.WaitForPageLoad(PropertiesCollection.driver);
+            CalBoxTechPack.Clear();
+            CalBoxTechPack.SendKeys(windowsMessages.GetCurDate(2));
+            btnSearch.Click();
+            Thread.Sleep(2000);
+            CalBoxTechPack.Clear();
+            CalBoxTechPack.SendKeys(windowsMessages.GetCurDate(3));
+            btnSearch.Click();
+            Thread.Sleep(2000);
+            CalBoxTechPack.Clear();
+            CalBoxTechPack.SendKeys(windowsMessages.GetCurDate(4));
+            btnSearch.Click();
+            Thread.Sleep(2000);
+            CalBoxTechPack.Clear();
+            btnSearch.Click();
+        }
+
         public void OpenStyle()
         {
             //btnStyleDesk.Click();
