@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -163,9 +164,63 @@ namespace PlmonFuncTestNunit.Helpers
             return j;
         }
 
+    public void ClickByRight(IList<IWebElement> elements, IList<IWebElement> elementsMen, int itemToClick)
+
+    {
+        int quant = elements.Count();
+        int counter = 0;
+        for (int i = 0; i < quant; i++)
+        {
+            IList<IWebElement> toClick = elements;
+
+            (new Actions(PropertiesCollection.driver)).ContextClick(toClick[i]).Perform();
+            SeleniumGetMethod.WaitForPageLoad(PropertiesCollection.driver);
+            Thread.Sleep(2000);
+            if (elementsMen[itemToClick].Displayed)
+            {
+                counter++;
+            }
+            new WebDriverWait(PropertiesCollection.driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementToBeClickable(elementsMen[itemToClick]));
+            elementsMen[itemToClick].Click();
+            SeleniumGetMethod.WaitForPageLoad(PropertiesCollection.driver);
+                        //for sorting
+            if (itemToClick == 0 || itemToClick == 1)
+            {
+                string afterColor = toClick[i].GetAttribute("style");
+                Assert.IsTrue(afterColor.Contains("background-color: rgb"));
+                PropertiesCollection._reportingTasks.Log(Status.Info, "It's no GROUP BY OR UNGROUP BY");
+            }
+        }
+        PropertiesCollection._reportingTasks.Log(Status.Info, "<b>" + "THERE ARE ITEMS TO CLICK: " + "</b>" + counter);
+                        //for grouping
+        if (itemToClick == 3 || itemToClick == 4)
+        {
+            int countOfUngroup = 0;
+            IList<IWebElement> ungroup = PropertiesCollection.driver.FindElements(By.CssSelector("input.rgUngroup"));
+            int ungrCount = ungroup.Count();
+            for (int i = ungrCount - 1; i >= 0; i--)
+            {
+                IList<IWebElement> toUngr = PropertiesCollection.driver.FindElements(By.CssSelector("input.rgUngroup"));
+                if (toUngr[i].Displayed)
+                {
+                    countOfUngroup++;
+                }
+                new WebDriverWait(PropertiesCollection.driver, TimeSpan.FromSeconds(3000)).Until(ExpectedConditions.ElementToBeClickable(toUngr[i]));
+                toUngr[i].Click();
+                SeleniumGetMethod.WaitForPageLoad(PropertiesCollection.driver);
+                Thread.Sleep(2000);
+                PropertiesCollection._reportingTasks.Log(Status.Info, "Try to test GROUPing");
+            }
+            PropertiesCollection._reportingTasks.Log(Status.Info, "<b>" + "THERE ARE CROSSES : " + "</b>" + countOfUngroup);
+            Assert.IsTrue(quant == counter && ungrCount == countOfUngroup);
+            PropertiesCollection._reportingTasks.Log(Status.Info, "<b>" + "elements used to sort/group : " + quant + "<br> elements clicked : " + counter + "<br>elements to ungroup : " + ungrCount + "<br> ungroup clicked crosses : " + countOfUngroup + "</b>");
+        }
+
     }
 
-    public class TableDatacollection
+}
+
+public class TableDatacollection
     {
         public int RowNumber { get; set; }
         public int ColumnIndex { get; set; }

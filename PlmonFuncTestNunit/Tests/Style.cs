@@ -20,7 +20,7 @@ namespace PlmonFuncTestNunit.Tests
 {
     //[TestFixture("ie", "ET")]
     //[TestFixture("Edge", "ET")]
-    [TestFixture("Chrome", "ET")]
+    [TestFixture("Chrome", "IT")]
     //[Parallelizable]
     public class Style : PropertiesCollection
     {
@@ -45,12 +45,12 @@ namespace PlmonFuncTestNunit.Tests
 
             _reportingTasks.Log(Status.Info, "<b>UserAuto go to Style Folder</b> " + driver.Url);
 
-           
             pageStyle.OpenStyle();
-            pageStyle.CheckGettingDate();
+            /*pageStyle.CheckGettingDate();
             pageStyle.CheckPagingInStyleFolder();
             pageStyle.CheckSearchMenu(dataInput);
-            pageStyle.DragDrop();
+            pageStyle.DragDrop();*/
+            pageStyle.ClickByRightInStyleFolder();
 
             //pageStyle.CkeckExcelBtn();
             //pageStyle.CkeckSortGrid();

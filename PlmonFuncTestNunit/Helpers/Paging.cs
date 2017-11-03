@@ -90,7 +90,7 @@ namespace PlmonFuncTestNunit.Helpers
 
         public void CheckPaging(PagingData data)
         {
-          
+
             IWebElement recordsFound = PropertiesCollection.driver.FindElement(By.CssSelector(data.recordsFound));
             IWebElement dropdownSelectPerPage = PropertiesCollection.driver.FindElement(By.CssSelector(data.dropdownSelectPerPage));
             IWebElement goButton = PropertiesCollection.driver.FindElement(By.Id(data.goButton));
@@ -157,14 +157,24 @@ namespace PlmonFuncTestNunit.Helpers
             quatLabel = PageOfPagesLogic(data).ToString();
             Assert.IsTrue(quatLabel == $"1 of {numberPages}", "Paging doesn't work properly - smth wrong with label...");
             SeleniumGetMethod.WaitForPageLoad(PropertiesCollection.driver);
-            IWebElement setGotoPage = PropertiesCollection.driver.FindElement(By.CssSelector(data.setGotoPage));
-            setGotoPage.SendKeys(numberPages.ToString());
-            IWebElement goToSkipPage = PropertiesCollection.driver.FindElement(By.CssSelector(data.goToSkipPage));
-            goToSkipPage.Click();
-            quatLabel = PageOfPagesLogic(data).ToString();
-            Assert.IsTrue(quatLabel == $"{numberPages} of {numberPages}", "Paging doesn't work properly - smth wrong with label...loop..");
+            if (data.setGotoPage != null)
+            {
+                PropertiesCollection._reportingTasks.Log(Status.Info, "There is 'GO TO PAGE' functionality, setGotoPage CssSelector is : " + data.setGotoPage);
+                IWebElement setGotoPage = PropertiesCollection.driver.FindElement(By.CssSelector(data.setGotoPage));
+                setGotoPage.SendKeys(numberPages.ToString());
+                IWebElement goToSkipPage = PropertiesCollection.driver.FindElement(By.CssSelector(data.goToSkipPage));
+                goToSkipPage.Click();
+                quatLabel = PageOfPagesLogic(data).ToString();
+                Assert.IsTrue(quatLabel == $"{numberPages} of {numberPages}", "Paging doesn't work properly - smth wrong with label...loop..");
+            }
+            else
+            {
+                PropertiesCollection._reportingTasks.Log(Status.Info, " 'GO TO PAGE' doesn't exist...setGotoPage CssSelector is Null : " + data.setGotoPage);
+            }
             SeleniumGetMethod.WaitForPageLoad(PropertiesCollection.driver);
         }
+
+
     }
 
     public class PagingData

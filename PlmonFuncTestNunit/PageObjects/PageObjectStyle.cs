@@ -128,6 +128,13 @@ namespace PlmonFuncTestNunit.PageObjects
         [FindsBy(How = How.CssSelector, Using = "#ctrGrid_RadGridStyles_ctl00 tbody tr")]
         public IList<IWebElement> GridRows { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "#ctrGrid_RadGridStyles_ctl00 > thead > tr th.rgHeaderYPLM")]
+        public IList<IWebElement> GridHeadersContextMenu { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "ul>li>a>span.rmText")]
+        public IList<IWebElement> ContextMenuItems { get; set; }
+
+
         string recordsFound = "#ctrGrid_RecordCount > strong";
         string dropdownSelectPerPage = "#ctrGrid_ps";
         string goButton = "ctrGrid_btnGo";
@@ -178,6 +185,15 @@ namespace PlmonFuncTestNunit.PageObjects
             }
         }
 
+        public void ClickByRightInStyleFolder()
+
+        {
+            SwitchToMain();
+            WebTable webTable = new WebTable();
+            webTable.ClickByRight(GridHeadersContextMenu, ContextMenuItems, 3);
+            Thread.Sleep(3000);
+            webTable.ClickByRight(GridHeadersContextMenu, ContextMenuItems, 1);
+        }
 
         public void ExcelNewCheck()
         {
